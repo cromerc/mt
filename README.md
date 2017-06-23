@@ -2,7 +2,7 @@
 
 Este proyecto es un implimentación de la Maquina de Turing.
 
-# License
+## License
 
 El programa es bajo la licensa de "3 Clause BSD" que se encuentra en: [LICENSE](LICENSE)
 

@@ -1,0 +1,6 @@
+mT.xml : Caso ideal, con <?xml> y <!DOCTYPE> definidos correctamente
+mT1.xml : No definidos <?xml> y <!DOCTYPE>, pero las transiciones con correctas
+mT2.xml : <?xml> definido, pero <!DOCTYPE> es un archivo distinto
+mT3.xml : <?xml> definido, pero <!DOCTYPE> no lo esta
+mT4.xml : <?xml> y <!DOCTYPE> definidos correctamente, pero las transiciones estan errados
+mtbase.dtd : Base para validar xml

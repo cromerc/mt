@@ -49,6 +49,13 @@ public class MT extends Application {
 	            Document document = xml.leerArchivo(archivo);
 	            if (document != null) {
 		            System.out.println(document.getDocumentElement().getNodeName());
+                    for(int i=0;i<document.getElementsByTagName("transicion").getLength();i++){
+                        System.out.println("("+document.getElementsByTagName("qi").item(i).getTextContent()+","+
+                                document.getElementsByTagName("si").item(i).getTextContent()+") = ("+
+                                document.getElementsByTagName("qj").item(i).getTextContent()+","+
+                                document.getElementsByTagName("sj").item(i).getTextContent()+","+
+                                document.getElementsByTagName("movimiento").item(i).getTextContent()+")");
+                    }//Ciclo base para obtener la función completa de las transiciones
 	            }
             }
         };

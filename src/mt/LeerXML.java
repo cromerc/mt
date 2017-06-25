@@ -85,7 +85,7 @@ class LeerXML {
 	 *
 	 * @param original es el archivo original del XML
 	 *
-	 * @return Retorna un document de un xml arreglado, null si el xml no es coherente a lo que se pide
+	 * @return Retorna un document de un XML arreglado, null si el xml no es coherente a lo que se pide
 	 */
 	private Document validarXML(File original) {
 		File temp = fixXML(original);
@@ -103,11 +103,11 @@ class LeerXML {
 	}
 
 	/**
-	 * Arreglar el archivo de xml si no es valido.
+	 * Arreglar el archivo de XML si no es valido.
 	 *
-	 * @param original Es el archivo xml sin cambios
+	 * @param original Es el archivo XML sin cambios
 	 *
-	 * @return un file de xml adaptado para ser validado
+	 * @return un file de XML adaptado para ser validado
 	 */
 	private File fixXML(File original) {
 		String aux;
@@ -136,7 +136,7 @@ class LeerXML {
 	}
 
 	/**
-	 * Esta clase se usa para comprobar que el xml es valido.
+	 * Esta clase se usa para comprobar que el XML es valido.
 	 */
 	class SimpleErrorHandler implements ErrorHandler, org.xml.sax.ErrorHandler {
 		boolean error = false;

@@ -10,13 +10,7 @@ package mt;
 import java.io.*;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
-import javax.xml.stream.util.StreamReaderDelegate;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 
-import com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl;
 import jdk.internal.org.xml.sax.ErrorHandler;
 import jdk.internal.org.xml.sax.SAXException;
 import jdk.internal.org.xml.sax.SAXParseException;
@@ -24,33 +18,37 @@ import jdk.internal.org.xml.sax.SAXParseException;
 import org.w3c.dom.Document;
 
 /**
- * Esta clase puede abrir y validar un archivo de xml. Se necesita un archivo mtbase.dtd
+ * Esta clase puede abrir y validar un archivo de XML. Se necesita un archivo mtbase.dtd
  */
 class LeerXML {
 
 	/**
-	 * El metodo va a verificar que el archivo existe y que contiene xml valido. Si es valido devuelve el documento.
+	 * El metodo va a verificar que el archivo existe y que contiene XML valido. Si es valido devuelve el documento.
 	 *
 	 * @param archivo Es el archivo a abrir.
-	 * @return Devuelve un document de xml o null si hay algun error.
+	 *
+	 * @return Devuelve un document de XML o null si hay algun error.
 	 */
-	public Document leerArchivo(File archivo) {
-		if(!archivo.exists() || !archivo.getName().endsWith(".xml")){
-			System.out.println("Archivo "+archivo.getName()+" no existe o no es compatible");
+	Document leerArchivo(File archivo) {
+		if (!archivo.exists() || !archivo.getName().endsWith(".xml")) {
+			System.out.println("Archivo " + archivo.getName() + " no existe o no es compatible");
 			return null;
 		}
 		Document dc = createDocument(archivo);
-		if(dc == null) return validarXML(archivo);
+		if (dc == null) {
+			return validarXML(archivo);
+		}
 		return dc;
 	}
 
 	/**
+	 * Crear un documento de XML
 	 *
-	 * @param archivo Es el archivo Xml
-	 * @return Retorna un document del xml o null si hay algun error.
+	 * @param archivo Es el archivo XML
+	 *
+	 * @return Retorna un document del XML o null si hay algun error.
 	 */
-
-	private Document createDocument(File archivo){
+	private Document createDocument(File archivo) {
 		Document document;
 		try {
 			if (!archivo.exists()) {
@@ -66,12 +64,14 @@ class LeerXML {
 			SimpleErrorHandler seh = new SimpleErrorHandler();
 			db.setErrorHandler(seh);
 			document = db.parse(archivo);
-			if(seh.error) return null;
+			if (seh.error) {
+				return null;
+			}
 			document.getDocumentElement().normalize();
 			return document;
 		}
-		catch(Exception e) {
-			if(e.getMessage().indexOf(".dtd") >= 0) {
+		catch (Exception e) {
+			if (e.getMessage().contains(".dtd")) {
 				return validarXML(archivo);
 			}
 			System.out.println(e.getMessage());
@@ -81,51 +81,71 @@ class LeerXML {
 	}
 
 	/**
+	 * Este metodo se usa para validar el XML.
 	 *
-	 * @param original es el archivo original del xml
+	 * @param original es el archivo original del XML
+	 *
 	 * @return Retorna un document de un xml arreglado, null si el xml no es coherente a lo que se pide
 	 */
-	private Document validarXML(File original){
+	private Document validarXML(File original) {
 		File temp = fixXML(original);
+		if (temp == null) {
+			return null;
+		}
 		Document document = createDocument(temp);
-		temp.delete();
-		if(document != null) return document;
+		if (!temp.delete()) {
+			System.out.println("No puede borrar el archivo " + temp.getName());
+		}
+		if (document != null) {
+			return document;
+		}
 		return null;
 	}
 
 	/**
+	 * Arreglar el archivo de xml si no es valido.
 	 *
 	 * @param original Es el archivo xml sin cambios
+	 *
 	 * @return un file de xml adaptado para ser validado
 	 */
-	private File fixXML(File original){
-		String aux = "";
+	private File fixXML(File original) {
+		String aux;
 		File temp;
-		try{
+		try {
 			temp = new File("temp.xml");
 			BufferedReader br = new BufferedReader(new FileReader(original));
 			BufferedWriter bw = new BufferedWriter(new FileWriter(temp));
-			if((aux = br.readLine()).startsWith("<?xml")){
-				bw.write(aux+"\n<!DOCTYPE root SYSTEM \"mtbase.dtd\">");
-			}else{
-				bw.write("<!DOCTYPE root SYSTEM \"mtbase.dtd\">\n"+aux);
+			if ((aux = br.readLine()).startsWith("<?xml")) {
+				bw.write(aux + "\n<!DOCTYPE root SYSTEM \"mtbase.dtd\">");
 			}
-			for(aux = "";aux != null;aux = br.readLine()){
-				if(!aux.startsWith("<!DOCTYPE")) bw.write(aux+"\n");
+			else {
+				bw.write("<!DOCTYPE root SYSTEM \"mtbase.dtd\">\n" + aux);
+			}
+			for (aux = ""; aux != null; aux = br.readLine()) {
+				if (!aux.startsWith("<!DOCTYPE")) {
+					bw.write(aux + "\n");
+				}
 			}
 			bw.close();
-		}catch (Exception e){return null;}
+		}
+		catch (Exception e) {
+			return null;
+		}
 		return temp;
 	}
 
 	/**
 	 * Esta clase se usa para comprobar que el xml es valido.
 	 */
-	protected class SimpleErrorHandler implements ErrorHandler, org.xml.sax.ErrorHandler {
-		public boolean error = false;
+	class SimpleErrorHandler implements ErrorHandler, org.xml.sax.ErrorHandler {
+		boolean error = false;
+
 		/**
 		 * Un warning
+		 *
 		 * @param e La excepción
+		 *
 		 * @throws SAXException La excepción thrown
 		 */
 		public void warning(SAXParseException e) throws SAXException {
@@ -134,7 +154,9 @@ class LeerXML {
 
 		/**
 		 * Un error
+		 *
 		 * @param e La excepción
+		 *
 		 * @throws SAXException La excepción thrown
 		 */
 		public void error(SAXParseException e) throws SAXException {
@@ -144,7 +166,9 @@ class LeerXML {
 
 		/**
 		 * Un error fatal
+		 *
 		 * @param e La excepción
+		 *
 		 * @throws SAXException La excepción thrown
 		 */
 		public void fatalError(SAXParseException e) throws SAXException {
@@ -154,6 +178,7 @@ class LeerXML {
 
 		/**
 		 * Un warning
+		 *
 		 * @param e La excepción
 		 */
 		@Override
@@ -163,6 +188,7 @@ class LeerXML {
 
 		/**
 		 * Un error
+		 *
 		 * @param e La excepción
 		 */
 		@Override
@@ -173,6 +199,7 @@ class LeerXML {
 
 		/**
 		 * Un error fatal
+		 *
 		 * @param e La excepción
 		 */
 		@Override

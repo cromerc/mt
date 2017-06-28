@@ -30,6 +30,10 @@ class LeerXML {
 	 * @return Devuelve un document de XML o null si hay algun error.
 	 */
 	Document leerArchivo(File archivo) {
+		if(archivo == null){
+			System.out.println("No se ha seleccionado archivo");
+			return null;
+		}
 		if (!archivo.exists() || !archivo.getName().endsWith(".xml")) {
 			System.out.println("Archivo " + archivo.getName() + " no existe o no es compatible");
 			return null;
@@ -160,7 +164,7 @@ class LeerXML {
 		 * @throws SAXException La excepción thrown
 		 */
 		public void error(SAXParseException e) throws SAXException {
-			System.out.println(e.getMessage());
+			//System.out.println(e.getMessage());
 			error = true;
 		}
 
@@ -172,7 +176,7 @@ class LeerXML {
 		 * @throws SAXException La excepción thrown
 		 */
 		public void fatalError(SAXParseException e) throws SAXException {
-			System.out.println(e.getMessage());
+			//System.out.println(e.getMessage());
 			error = true;
 		}
 
@@ -193,7 +197,7 @@ class LeerXML {
 		 */
 		@Override
 		public void error(org.xml.sax.SAXParseException e) {
-			System.out.println(e.getMessage());
+			//System.out.println(e.getMessage());
 			error = true;
 		}
 
@@ -204,7 +208,7 @@ class LeerXML {
 		 */
 		@Override
 		public void fatalError(org.xml.sax.SAXParseException e) {
-			System.out.println(e.getMessage());
+			//System.out.println(e.getMessage());
 			error = true;
 		}
 	}

@@ -6,6 +6,11 @@
  */
 
 package mt;
+import org.w3c.dom.Document;
 
-public class Controller {
+public class Machine {
+    Automata machine;
+    public Machine(Document document){
+        machine = new Automata(document);
+    }
 }

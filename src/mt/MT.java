@@ -30,6 +30,8 @@ public class MT extends Application {
 	 * @param primaryStage La ventana principal
 	 * @throws Exception La excepción
 	 */
+
+    static Machine machine;
     @Override
     public void start(final Stage primaryStage) throws Exception{
         //Parent root = FXMLLoader.load(getClass().getResource("mt.fxml"));
@@ -47,16 +49,12 @@ public class MT extends Application {
 	            File archivo = fileChooser.showOpenDialog(primaryStage);
 	            LeerXML xml = new LeerXML();
 	            Document document = xml.leerArchivo(archivo);
-	            if (document != null) {
-		            System.out.println(document.getDocumentElement().getNodeName());
-                    for(int i=0;i<document.getElementsByTagName("transicion").getLength();i++){
-                        System.out.println("("+document.getElementsByTagName("qi").item(i).getTextContent()+","+
-                                document.getElementsByTagName("si").item(i).getTextContent()+") = ("+
-                                document.getElementsByTagName("qj").item(i).getTextContent()+","+
-                                document.getElementsByTagName("sj").item(i).getTextContent()+","+
-                                document.getElementsByTagName("movimiento").item(i).getTextContent()+")");
-                    }//Ciclo base para obtener la función completa de las transiciones
-	            }
+	            if(document != null) {
+                    machine = new Machine(document);
+                    for(int i=0; i<machine.machine.estados.size();i++){
+                        System.out.println(machine.machine.estados.get(i));
+                    }
+                }
             }
         };
         button.addEventFilter(MouseEvent.MOUSE_CLICKED,eventHandler);

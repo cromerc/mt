@@ -54,6 +54,9 @@ public class MT extends Application {
                     for(int i=0; i<machine.machine.estados.size();i++){
                         System.out.println(machine.machine.estados.get(i));
                     }
+                    if(machine.comprobarCadena(new StringBuilder("000111###"),5)){
+                        System.out.println("Reconoce");
+                    }else System.out.println("No reconoce");
                 }
             }
         };

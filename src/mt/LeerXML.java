@@ -7,15 +7,14 @@
 
 package mt;
 
-import java.io.*;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.DocumentBuilder;
-
 import jdk.internal.org.xml.sax.ErrorHandler;
 import jdk.internal.org.xml.sax.SAXException;
 import jdk.internal.org.xml.sax.SAXParseException;
-
 import org.w3c.dom.Document;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.*;
 
 /**
  * Esta clase puede abrir y validar un archivo de XML. Se necesita un archivo mtbase.dtd
@@ -30,12 +29,11 @@ class LeerXML {
 	 * @return Devuelve un document de XML o null si hay algun error.
 	 */
 	Document leerArchivo(File archivo) {
-		if(archivo == null){
-			System.out.println("No se ha seleccionado archivo");
+		if (archivo == null) {
 			return null;
 		}
-		if (!archivo.exists() || !archivo.getName().endsWith(".xml")) {
-			System.out.println("Archivo " + archivo.getName() + " no existe o no es compatible");
+		if (!archivo.exists()) {
+			MT.mostrarMensaje("Error", "Archivo " + archivo.getName() + " no existe!");
 			return null;
 		}
 		Document dc = createDocument(archivo);
@@ -53,10 +51,10 @@ class LeerXML {
 	 * @return Retorna un document del XML o null si hay algun error.
 	 */
 	private Document createDocument(File archivo) {
-		Document document;
+		Document documento;
 		try {
 			if (!archivo.exists()) {
-				System.out.println("El archivo " + archivo.getName() + " no existe!");
+				MT.mostrarMensaje("Error", "Archivo " + archivo.getName() + " no existe!");
 				return null;
 			}
 
@@ -67,12 +65,12 @@ class LeerXML {
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			SimpleErrorHandler seh = new SimpleErrorHandler();
 			db.setErrorHandler(seh);
-			document = db.parse(archivo);
+			documento = db.parse(archivo);
 			if (seh.error) {
 				return null;
 			}
-			document.getDocumentElement().normalize();
-			return document;
+			documento.getDocumentElement().normalize();
+			return documento;
 		}
 		catch (Exception e) {
 			if (e.getMessage().contains(".dtd")) {
@@ -96,12 +94,12 @@ class LeerXML {
 		if (temp == null) {
 			return null;
 		}
-		Document document = createDocument(temp);
+		Document documento = createDocument(temp);
 		if (!temp.delete()) {
-			System.out.println("No puede borrar el archivo " + temp.getName());
+			MT.mostrarMensaje("Error", "No se puede borrar el archivo " + temp.getName());
 		}
-		if (document != null) {
-			return document;
+		if (documento != null) {
+			return documento;
 		}
 		return null;
 	}

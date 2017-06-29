@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (c) 2017 Christopher Cromer
+Copyright (c) 2017 Carlos Faúndez
+
+This file is part of mt. It is subject to the license terms in the LICENSE file found in the top-level directory of this distribution.
+This file may not be copied, modified, propagated, or distributed except according to the terms contained in the LICENSE file.
+-->
+
+<?import javafx.scene.control.*?>
+<MenuBar xmlns:fx="http://javafx.com/fxml/1" fx:id="menuBar" fx:controller="mt.MenuController" xmlns="http://javafx.com/javafx/8.0.92">
+	<Menu text="Operaciones">
+		<MenuItem text="Cargar transiciones ..." onAction="#cargarTransiciones"/>
+		<MenuItem text="Reconocimiento indiviudal ..." disable="true" onAction="#cargarTransiciones"/>
+		<MenuItem text="Reconocimiento por lote ..." disable="true" onAction="#cargarTransiciones"/>
+	</Menu>
+</MenuBar>

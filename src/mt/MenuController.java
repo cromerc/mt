@@ -7,6 +7,7 @@
 
 package mt;
 
+import com.sun.javafx.scene.control.skin.TableHeaderRow;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -69,9 +70,13 @@ public class MenuController extends VBox implements Initializable {
 			contenido.getChildren().add(tableView);
 			TableColumn tableColumn1 = (TableColumn) tableView.getColumns().get(0);
 			TableColumn tableColumn2 = (TableColumn) tableView.getColumns().get(1);
-			tableColumn1.setMaxWidth(1f * Integer.MAX_VALUE * 50);
-			tableColumn2.setMaxWidth(1f * Integer.MAX_VALUE * 50);
-			tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+			tableView.skinProperty().addListener((source, oldWidth, newWidth) -> {
+				final TableHeaderRow header = (TableHeaderRow) tableView.lookup("TableHeaderRow");
+				header.reorderingProperty().addListener((observable, oldValue, newValue) -> header.setReordering(false));
+			});
+			tableColumn1.prefWidthProperty().bind(tableView.widthProperty().multiply(0.5));
+			tableColumn2.prefWidthProperty().bind(tableView.widthProperty().multiply(0.5));
+
 			/*if (maquina.comprobarCadena(new StringBuilder("000111###"), 5)) {
 				MT.mostrarMensaje("Resultado", "Reconce");
 			}

@@ -8,16 +8,20 @@
 package mt;
 
 import com.sun.javafx.scene.control.skin.TableHeaderRow;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
-import javafx.scene.control.TableColumn;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.w3c.dom.Document;
@@ -25,6 +29,8 @@ import org.w3c.dom.Document;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Controlar las acciones cuando una opción es elegido en el menu.
@@ -32,6 +38,12 @@ import java.util.ResourceBundle;
 public class MenuController extends VBox implements Initializable {
 	@FXML
 	private MenuBar menuBar;
+
+	@FXML
+	private MenuItem menuIndiv;
+
+	@FXML
+	private MenuItem menuLote;
 
 	/**
 	 * Inicialicar el menu con el idioma.
@@ -61,21 +73,42 @@ public class MenuController extends VBox implements Initializable {
 		Document documento = xml.leerArchivo(archivo);
 		if (documento != null) {
 			maquina = new Maquina(documento);
-			for (int i = 0; i < maquina.getMaquina().getEstados().size(); i++) {
-				System.out.println(maquina.getMaquina().getEstados().get(i));
+			TableView temp = (TableView) scene.lookup("#tableView");
+			VBox contenido = (VBox) scene.lookup("#contenido");
+			if (temp != null) {
+				// Remover tabla anterior si existe
+				contenido.getChildren().remove(temp);
 			}
-			TableView tableView = FXMLLoader.load(getClass().getResource("tabla.fxml"));
-			HBox.setHgrow(tableView, Priority.ALWAYS);
-			HBox contenido = (HBox) scene.lookup("#contenido");
-			contenido.getChildren().add(tableView);
-			TableColumn tableColumn1 = (TableColumn) tableView.getColumns().get(0);
-			TableColumn tableColumn2 = (TableColumn) tableView.getColumns().get(1);
+			else {
+				Text text = new Text(0, 0, "TRANSICIONES CARGADAS");
+				text.setFill(Color.BLACK);
+				text.setFont(Font.font(java.awt.Font.SANS_SERIF, 25));
+				contenido.getChildren().add(text);
+
+				menuIndiv.setDisable(false);
+				menuLote.setDisable(false);
+			}
+			TableView<ListaCargada> tableView = FXMLLoader.load(getClass().getResource("tabla.fxml"));
+			VBox.setVgrow(tableView, Priority.ALWAYS);
 			tableView.skinProperty().addListener((source, oldWidth, newWidth) -> {
 				final TableHeaderRow header = (TableHeaderRow) tableView.lookup("TableHeaderRow");
 				header.reorderingProperty().addListener((observable, oldValue, newValue) -> header.setReordering(false));
 			});
-			tableColumn1.prefWidthProperty().bind(tableView.widthProperty().multiply(0.5));
-			tableColumn2.prefWidthProperty().bind(tableView.widthProperty().multiply(0.5));
+			tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+			ObservableList<ListaCargada> listaCargadas = FXCollections.observableArrayList();
+			Pattern pattern = Pattern.compile("(\\(.*\\)) = (\\(.*\\))");
+			for (int i = 0; i < maquina.getMaquina().getEstados().size(); i++) {
+				Matcher matcher = pattern.matcher(maquina.getMaquina().getEstados().get(i).toString());
+				while (matcher.find()) {
+					listaCargadas.add(new ListaCargada(matcher.group(1), matcher.group(2)));
+				}
+			}
+
+			tableView.setEditable(true);
+			tableView.setItems(listaCargadas);
+
+			contenido.getChildren().add(tableView);
 
 			/*if (maquina.comprobarCadena(new StringBuilder("000111###"), 5)) {
 				MT.mostrarMensaje("Resultado", "Reconce");
@@ -84,5 +117,21 @@ public class MenuController extends VBox implements Initializable {
 				MT.mostrarMensaje("Resultado", " No reconce");
 			}*/
 		}
+	}
+
+	/**
+	 * Menu opción reconocimiento indivual
+	 */
+	@FXML
+	protected void reconoceIndividual() {
+
+	}
+
+	/**
+	 * Menu opción reconocimiento lote
+	 */
+	@FXML
+	protected void reconoceLote() {
+
 	}
 }

@@ -7,12 +7,21 @@ This file is part of mt. It is subject to the license terms in the LICENSE file 
 This file may not be copied, modified, propagated, or distributed except according to the terms contained in the LICENSE file.
 -->
 
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.GridPane?>
 <TableView xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.92" fx:id="tableView" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" GridPane.columnIndex="0" GridPane.rowIndex="0">
 	<columns>
-		<TableColumn fx:id="columna1" sortable="false" editable="false" text="(qi,si)"/>
-		<TableColumn fx:id="columna2" sortable="false" editable="false" text="(qj,sj,movimiento)"/>
+		<TableColumn fx:id="columna1" sortable="false" text="(qi,si)">
+			<cellValueFactory>
+				<PropertyValueFactory property="primer"/>
+			</cellValueFactory>
+		</TableColumn>
+		<TableColumn fx:id="columna2" sortable="false" text="(qj,sj,movimiento)">
+			<cellValueFactory>
+				<PropertyValueFactory property="segundo"/>
+			</cellValueFactory>
+		</TableColumn>
 	</columns>
 </TableView>

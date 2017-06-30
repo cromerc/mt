@@ -13,3 +13,23 @@
 .scroll-pane {
     -fx-background-color: transparent;
 }
+
+.table-view {
+    -fx-background-color: transparent;
+}
+
+#tableView .table-column {
+    -fx-alignment: CENTER;
+}
+
+.table-row-cell:empty {
+    -fx-background-color: transparent;
+}
+
+.table-row-cell:empty .table-cell {
+    -fx-border-width: 0px;
+}
+
+.list-cell:empty {
+    -fx-background-color: transparent;
+}

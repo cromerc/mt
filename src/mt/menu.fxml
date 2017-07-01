@@ -11,7 +11,7 @@ This file may not be copied, modified, propagated, or distributed except accordi
 <MenuBar xmlns:fx="http://javafx.com/fxml/1" fx:id="menuBar" fx:controller="mt.MenuController" xmlns="http://javafx.com/javafx/8.0.92">
 	<Menu text="Operaciones">
 		<MenuItem text="Cargar transiciones" onAction="#cargarTransiciones"/>
-		<MenuItem fx:id="menuIndiv" text="Reconocimiento indiviudal" disable="true" onAction="#reconoceIndividual"/>
+		<MenuItem fx:id="menuIndiv" text="Reconocimiento individual" disable="true" onAction="#reconoceIndividual"/>
 		<MenuItem fx:id="menuLote" text="Reconocimiento por lote" disable="true" onAction="#reconoceLote"/>
 	</Menu>
 </MenuBar>

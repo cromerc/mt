@@ -23,6 +23,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.w3c.dom.Document;
 
@@ -36,6 +37,8 @@ import java.util.regex.Pattern;
  * Controlar las acciones cuando una opción es elegido en el menu.
  */
 public class MenuController extends VBox implements Initializable {
+	Maquina maquina = null;
+
 	@FXML
 	private MenuBar menuBar;
 
@@ -65,7 +68,6 @@ public class MenuController extends VBox implements Initializable {
 	protected void cargarTransiciones() throws Exception {
 		Scene scene = menuBar.getScene();
 		Stage stage = (Stage) scene.getWindow();
-		Maquina maquina;
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Abrir archivo XML");
 		File archivo = fileChooser.showOpenDialog(stage);
@@ -88,7 +90,7 @@ public class MenuController extends VBox implements Initializable {
 				menuIndiv.setDisable(false);
 				menuLote.setDisable(false);
 			}
-			TableView<ListaCargada> tableView = FXMLLoader.load(getClass().getResource("tabla.fxml"));
+			TableView<ListaCargada> tableView = FXMLLoader.load(getClass().getResource("transiciones.fxml"));
 			VBox.setVgrow(tableView, Priority.ALWAYS);
 			tableView.skinProperty().addListener((source, oldWidth, newWidth) -> {
 				final TableHeaderRow header = (TableHeaderRow) tableView.lookup("TableHeaderRow");
@@ -120,7 +122,7 @@ public class MenuController extends VBox implements Initializable {
 	}
 
 	/**
-	 * Menu opción reconocimiento indivual
+	 * Menu opción reconocimiento individual
 	 */
 	@FXML
 	protected void reconoceIndividual() {
@@ -131,7 +133,19 @@ public class MenuController extends VBox implements Initializable {
 	 * Menu opción reconocimiento lote
 	 */
 	@FXML
-	protected void reconoceLote() {
+	protected void reconoceLote() throws Exception {
+		Scene parentScene = menuBar.getScene();
+		Stage parentStage = (Stage) parentScene.getWindow();
 
+		FXMLLoader fxmlLoader = new FXMLLoader();
+		fxmlLoader.setLocation(getClass().getResource("lote.fxml"));
+		Scene scene = new Scene(fxmlLoader.load(), 640, 480);
+		scene.setUserData(maquina);
+		Stage stage = new Stage();
+		stage.initModality(Modality.WINDOW_MODAL);
+		stage.initOwner(parentStage);
+		stage.setTitle("Reconocimiento por lotes");
+		stage.setScene(scene);
+		stage.show();
 	}
 }

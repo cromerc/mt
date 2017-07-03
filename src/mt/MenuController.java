@@ -12,11 +12,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -28,16 +29,14 @@ import javafx.stage.Stage;
 import org.w3c.dom.Document;
 
 import java.io.File;
-import java.net.URL;
-import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
  * Controlar las acciones cuando una opción es elegido en el menu.
  */
-public class MenuController extends VBox implements Initializable {
-	Maquina maquina = null;
+public class MenuController {
+	private Maquina maquina = null;
 
 	@FXML
 	private MenuBar menuBar;
@@ -47,17 +46,6 @@ public class MenuController extends VBox implements Initializable {
 
 	@FXML
 	private MenuItem menuLote;
-
-	/**
-	 * Inicialicar el menu con el idioma.
-	 *
-	 * @param location Tiene URL de FXML en uso.
-	 * @param resourceBundle Tiene recursos qu se pasa al controller.
-	 */
-	@Override
-	public void initialize(URL location, ResourceBundle resourceBundle) {
-		// No es necesario poner algo aqui porque el programa mt no se usa los resourceBundles
-	}
 
 	/**
 	 * Menu opción cargar transiciones
@@ -90,7 +78,7 @@ public class MenuController extends VBox implements Initializable {
 				menuIndiv.setDisable(false);
 				menuLote.setDisable(false);
 			}
-			TableView<ListaCargada> tableView = FXMLLoader.load(getClass().getResource("transiciones.fxml"));
+			TableView<TablaData> tableView = FXMLLoader.load(getClass().getResource("tabla.fxml"));
 			VBox.setVgrow(tableView, Priority.ALWAYS);
 			tableView.skinProperty().addListener((source, oldWidth, newWidth) -> {
 				final TableHeaderRow header = (TableHeaderRow) tableView.lookup("TableHeaderRow");
@@ -98,17 +86,20 @@ public class MenuController extends VBox implements Initializable {
 			});
 			tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-			ObservableList<ListaCargada> listaCargadas = FXCollections.observableArrayList();
+			ObservableList<TablaData> tablaData = FXCollections.observableArrayList();
 			Pattern pattern = Pattern.compile("(\\(.*\\)) = (\\(.*\\))");
 			for (int i = 0; i < maquina.getMaquina().getEstados().size(); i++) {
 				Matcher matcher = pattern.matcher(maquina.getMaquina().getEstados().get(i).toString());
 				while (matcher.find()) {
-					listaCargadas.add(new ListaCargada(matcher.group(1), matcher.group(2)));
+					tablaData.add(new TablaData(matcher.group(1), matcher.group(2)));
 				}
 			}
 
 			tableView.setEditable(true);
-			tableView.setItems(listaCargadas);
+			tableView.setItems(tablaData);
+
+			tableView.getColumns().get(0).setText("(qi,si)");
+			tableView.getColumns().get(1).setText("(qj,sj,movimiento)");
 
 			contenido.getChildren().add(tableView);
 
@@ -133,6 +124,7 @@ public class MenuController extends VBox implements Initializable {
 	 * Menu opción reconocimiento lote
 	 */
 	@FXML
+	@SuppressWarnings("unchecked")
 	protected void reconoceLote() throws Exception {
 		Scene parentScene = menuBar.getScene();
 		Stage parentStage = (Stage) parentScene.getWindow();
@@ -141,11 +133,36 @@ public class MenuController extends VBox implements Initializable {
 		fxmlLoader.setLocation(getClass().getResource("lote.fxml"));
 		Scene scene = new Scene(fxmlLoader.load(), 640, 480);
 		scene.setUserData(maquina);
+		scene.getStylesheets().add("/mt/mt.css");
 		Stage stage = new Stage();
 		stage.initModality(Modality.WINDOW_MODAL);
 		stage.initOwner(parentStage);
 		stage.setTitle("Reconocimiento por lotes");
+		stage.setMinHeight(480);
+		stage.setMinWidth(640);
 		stage.setScene(scene);
 		stage.show();
+
+		TableView<TablaData> tableView = FXMLLoader.load(getClass().getResource("tabla.fxml"));
+		VBox.setVgrow(tableView, Priority.ALWAYS);
+		tableView.skinProperty().addListener((source, oldWidth, newWidth) -> {
+			final TableHeaderRow header = (TableHeaderRow) tableView.lookup("TableHeaderRow");
+			header.reorderingProperty().addListener((observable, oldValue, newValue) -> header.setReordering(false));
+		});
+		tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+		TableColumn<TablaData, String> columna1 = (TableColumn<TablaData, String>) tableView.getColumns().get(0);
+		columna1.setCellFactory(TextFieldTableCell.forTableColumn());
+		columna1.setOnEditCommit(
+				columna -> columna.getTableView().getItems().get(columna.getTablePosition().getRow()).setPrimer(columna.getNewValue())
+		);
+
+		tableView.getColumns().get(0).setText("Cadena");
+		tableView.getColumns().get(0).setEditable(true);
+		tableView.getColumns().get(1).setText("Aceptada/Rechazada");
+		tableView.getColumns().get(1).setEditable(false);
+
+		VBox contenido = (VBox) scene.lookup("#contenidoLote");
+		contenido.getChildren().add(tableView);
 	}
 }

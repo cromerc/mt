@@ -13,12 +13,12 @@ This file may not be copied, modified, propagated, or distributed except accordi
 <?import javafx.scene.layout.GridPane?>
 <TableView xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.92" fx:id="tableView" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" GridPane.columnIndex="0" GridPane.rowIndex="0">
 	<columns>
-		<TableColumn fx:id="columna1" sortable="false" text="(qi,si)">
+		<TableColumn sortable="false">
 			<cellValueFactory>
 				<PropertyValueFactory property="primer"/>
 			</cellValueFactory>
 		</TableColumn>
-		<TableColumn fx:id="columna2" sortable="false" text="(qj,sj,movimiento)">
+		<TableColumn sortable="false">
 			<cellValueFactory>
 				<PropertyValueFactory property="segundo"/>
 			</cellValueFactory>

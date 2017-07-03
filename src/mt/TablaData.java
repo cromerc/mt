@@ -2,17 +2,17 @@ package mt;
 
 import javafx.beans.property.SimpleStringProperty;
 
-public class ListaCargada {
+public class TablaData {
 	private final SimpleStringProperty primer;
 
 	private final SimpleStringProperty segundo;
 
-	public ListaCargada(SimpleStringProperty primer, SimpleStringProperty segundo) {
+	public TablaData(SimpleStringProperty primer, SimpleStringProperty segundo) {
 		this.primer = primer;
 		this.segundo = segundo;
 	}
 
-	public ListaCargada(String primer, String segundo) {
+	public TablaData(String primer, String segundo) {
 		this.primer = new SimpleStringProperty(primer);
 		this.segundo = new SimpleStringProperty(segundo);
 	}

@@ -15,8 +15,7 @@ public class LoteController {
 	protected void runLote() throws Exception {
 		Scene scene = vboxLote.getScene();
 		Maquina maquina = (Maquina) scene.getUserData();
-		int[] estados = {5};
-		if (maquina.comprobarCadena(new StringBuilder("000111###"),estados)) {
+		if (maquina.comprobarCadena(new StringBuilder("000111###"), 5)) {
 			MT.mostrarMensaje("Resultado", "Reconce");
 		}
 		else {

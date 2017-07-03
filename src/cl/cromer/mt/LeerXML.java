@@ -21,6 +21,7 @@ import java.io.*;
  */
 class LeerXML {
 
+	private boolean error = false;
 	/**
 	 * El metodo va a verificar que el archivo existe y que contiene XML valido. Si es valido devuelve el documento.
 	 *
@@ -36,7 +37,12 @@ class LeerXML {
 			MT.mostrarMensaje("Error", "Archivo " + archivo.getName() + " no existe!");
 			return null;
 		}
-		return createDocument(archivo);
+		Document dc = createDocument(archivo);
+		if(dc == null) {
+			error = false;
+			return validarXML(archivo);
+		}
+		return dc;
 	}
 
 	/**
@@ -62,8 +68,8 @@ class LeerXML {
 			SimpleErrorHandler seh = new SimpleErrorHandler();
 			db.setErrorHandler(seh);
 			documento = db.parse(archivo);
-			if (seh.error) {
-				MT.mostrarMensaje("Error", "El archivo " + archivo.getName() + " no contiene xml valido!");
+			if (error) {
+				//MT.mostrarMensaje("Error", "El archivo " + archivo.getName() + " no contiene xml valido!");
 				return null;
 			}
 			documento.getDocumentElement().normalize();
@@ -139,7 +145,6 @@ class LeerXML {
 	 * Esta clase se usa para comprobar que el XML es valido.
 	 */
 	class SimpleErrorHandler implements ErrorHandler, org.xml.sax.ErrorHandler {
-		boolean error = false;
 
 		/**
 		 * Un warning

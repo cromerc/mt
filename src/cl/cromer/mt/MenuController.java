@@ -103,6 +103,8 @@ public class MenuController {
 			tableView.getColumns().get(1).setText("(qj,sj,movimiento)");
 
 			contenido.getChildren().add(tableView);
+		}else{
+			MT.mostrarMensaje("Error","El archivo "+ archivo.getName()+ " no es un xml valido");
 		}
 	}
 

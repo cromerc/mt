@@ -18,6 +18,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -102,13 +103,6 @@ public class MenuController {
 			tableView.getColumns().get(1).setText("(qj,sj,movimiento)");
 
 			contenido.getChildren().add(tableView);
-
-			/*if (maquina.comprobarCadena(new StringBuilder("000111###"), 5)) {
-				MT.mostrarMensaje("Resultado", "Reconce");
-			}
-			else {
-				MT.mostrarMensaje("Resultado", " No reconce");
-			}*/
 		}
 	}
 
@@ -141,6 +135,7 @@ public class MenuController {
 		stage.setMinHeight(480);
 		stage.setMinWidth(640);
 		stage.setScene(scene);
+		stage.getIcons().add(new Image(getClass().getResourceAsStream("/mt/images/icon.png")));
 		stage.show();
 
 		TableView<TablaData> tableView = FXMLLoader.load(getClass().getResource("tabla.fxml"));

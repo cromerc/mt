@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -60,6 +61,7 @@ public class MT extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.setMinHeight(480);
 		primaryStage.setMinWidth(640);
+		primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/mt/images/icon.png")));
 		primaryStage.show();
 	}
 }

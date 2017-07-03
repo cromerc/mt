@@ -9,8 +9,8 @@ package mt;
 
 import org.w3c.dom.Document;
 
-class Maquina {
-	private final Automata maquina;
+class Maquina implements Cloneable {
+	private Automata maquina;
 	private Estado estadoactual;
 	private Enlace enlaceactual;
 	private String cintaanterior;
@@ -20,6 +20,21 @@ class Maquina {
 		estadoactual = maquina.getEstados().get(0);
 		enlaceactual = null;
 		cintaanterior = "";
+	}
+
+	@Override
+	public Maquina clone() {
+		try {
+			final Maquina result = (Maquina) super.clone();
+			result.maquina = this.maquina;
+			result.estadoactual = this.estadoactual;
+			result.enlaceactual = this.enlaceactual;
+			result.cintaanterior = this.cintaanterior;
+			return result;
+		}
+		catch (final CloneNotSupportedException e) {
+			throw new AssertionError();
+		}
 	}
 
 	Automata getMaquina() {return maquina;}

@@ -14,12 +14,11 @@ class Maquina implements Cloneable {
 	private Estado estadoactual;
 	private Enlace enlaceactual;
 	private String cintaanterior;
+	private int cabezal;
 
 	Maquina(Document document) {
 		maquina = new Automata(document);
-		estadoactual = maquina.getEstados().get(0);
-		enlaceactual = null;
-		cintaanterior = "";
+		reset();
 	}
 
 	@Override
@@ -45,14 +44,23 @@ class Maquina implements Cloneable {
 
 	public String getCintaanterior() {return cintaanterior;}
 
+	public int getCabezal() {return cabezal;}
+
+	public void reset(){
+		estadoactual = maquina.getEstados().get(0);
+		enlaceactual = null;
+		cintaanterior = "";
+		cabezal = 0;
+	}
+
 	boolean comprobarCadena(StringBuilder cinta, int[] estadoFinal) {
 		//estadoactual = maquina.getEstados().get(0);
-		int cabezal = 0;
 		int i;
 		for (i = 0; i < estadoactual.getEnlaces().size(); i++) {
 			if (estadoactual.getEnlaces().get(i).getSi() == cinta.charAt(cabezal)) {
-				cinta.setCharAt(cabezal, estadoactual.getEnlaces().get(i).getSj());
-				switch (estadoactual.getEnlaces().get(i).getMovimiento()) {
+				enlaceactual = estadoactual.getEnlaces().get(i);
+				cinta.setCharAt(cabezal, enlaceactual.getSj());
+				switch (enlaceactual.getMovimiento()) {
 					case 'L': {
 						cabezal--;
 						if (cabezal == (-1)) {
@@ -70,19 +78,56 @@ class Maquina implements Cloneable {
 					}
 					default: {/*Se mantiene*/}
 				}
-				estadoactual = estadoactual.getEnlaces().get(i).getQj();
+				estadoactual = enlaceactual.getQj();
 				i = -1;
 			}
 		}
 		for(i=0;i<estadoFinal.length;i++){
-			if(estadoactual.getQ() == estadoFinal[i]) return true;
+			if(estadoactual.getQ() == estadoFinal[i]){
+				reset();
+				return true;
+			}
 		}
+		reset();
 		return false;
 	}
 
 	boolean comprobarCadenaS2S(StringBuilder cinta, int[] estadoFinal){
 		cintaanterior = cinta.toString();
-		return false; // Programando ahora
+		int i;
+		for (i = 0; i < estadoactual.getEnlaces().size(); i++) {
+			if (estadoactual.getEnlaces().get(i).getSi() == cinta.charAt(cabezal)) {
+				enlaceactual = estadoactual.getEnlaces().get(i);
+				estadoactual = enlaceactual.getQj();
+				cinta.setCharAt(cabezal, enlaceactual.getSj());
+				switch (enlaceactual.getMovimiento()) {
+					case 'L': {
+						cabezal--;
+						if (cabezal == (-1)) {
+							cinta.insert(0, "#");
+							cabezal++;
+						}
+						break;
+					}
+					case 'R': {
+						cabezal++;
+						if (cabezal == cinta.length()) {
+							cinta.insert(cabezal, "#");
+						}
+						break;
+					}
+					default: {/*Se mantiene*/}
+				}
+				return true;
+			}
+		}
+		for(i=0;i<estadoFinal.length;i++){
+			if(estadoactual.getQ() == estadoFinal[i]){
+				enlaceactual = null; // Indicar que no hay más transiciones
+				return true;
+			}
+		}
+		return false;
 	}
 }
 

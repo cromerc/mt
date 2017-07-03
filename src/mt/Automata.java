@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 class Automata {
 	private ArrayList<Estado> estados;
+	private ArrayList<Integer> estados_existentes;
 
 	Automata(Document document) {
 		setEstados(new ArrayList<>());
@@ -49,6 +50,10 @@ class Automata {
 				System.out.println("Movimiento invalido de cinta");
 				System.exit(1);
 			}
+		}
+		estados_existentes = new ArrayList<Integer>();
+		for(int i=0 ; i < getEstados().size() ; i++){
+			if(getEstados().get(i) != null) estados_existentes.add(getEstados().get(i).getQ());
 		}
 	}
 

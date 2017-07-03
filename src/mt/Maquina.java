@@ -11,23 +11,33 @@ import org.w3c.dom.Document;
 
 class Maquina {
 	private final Automata maquina;
+	private Estado estadoactual;
+	private Enlace enlaceactual;
+	private String cintaanterior;
 
 	Maquina(Document document) {
 		maquina = new Automata(document);
+		estadoactual = maquina.getEstados().get(0);
+		enlaceactual = null;
+		cintaanterior = "";
 	}
 
-	Automata getMaquina() {
-		return maquina;
-	}
+	Automata getMaquina() {return maquina;}
 
-	boolean comprobarCadena(StringBuilder cinta, int estadoFinal) {
-		Estado qi = maquina.getEstados().get(0);
+	public Estado getEstadoactual() {return estadoactual;}
+
+	public Enlace getEnlaceactual() {return enlaceactual;}
+
+	public String getCintaanterior() {return cintaanterior;}
+
+	boolean comprobarCadena(StringBuilder cinta, int[] estadoFinal) {
+		//estadoactual = maquina.getEstados().get(0);
 		int cabezal = 0;
 		int i;
-		for (i = 0; i < qi.getEnlaces().size(); i++) {
-			if (qi.getEnlaces().get(i).getSi() == cinta.charAt(cabezal)) {
-				cinta.setCharAt(cabezal, qi.getEnlaces().get(i).getSj());
-				switch (qi.getEnlaces().get(i).getMovimiento()) {
+		for (i = 0; i < estadoactual.getEnlaces().size(); i++) {
+			if (estadoactual.getEnlaces().get(i).getSi() == cinta.charAt(cabezal)) {
+				cinta.setCharAt(cabezal, estadoactual.getEnlaces().get(i).getSj());
+				switch (estadoactual.getEnlaces().get(i).getMovimiento()) {
 					case 'L': {
 						cabezal--;
 						if (cabezal == (-1)) {
@@ -45,11 +55,19 @@ class Maquina {
 					}
 					default: {/*Se mantiene*/}
 				}
-				qi = qi.getEnlaces().get(i).getQj();
+				estadoactual = estadoactual.getEnlaces().get(i).getQj();
 				i = -1;
 			}
 		}
-		return (qi.getQ() == estadoFinal);
+		for(i=0;i<estadoFinal.length;i++){
+			if(estadoactual.getQ() == estadoFinal[i]) return true;
+		}
+		return false;
+	}
+
+	boolean comprobarCadenaS2S(StringBuilder cinta, int[] estadoFinal){
+		cintaanterior = cinta.toString();
+		return false; // Programando ahora
 	}
 }
 

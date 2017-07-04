@@ -36,7 +36,10 @@ import java.util.regex.Pattern;
  * Controlar las acciones cuando una opción es elegido en el menu.
  */
 public class MenuController {
+	protected EstadosFinales estadosFinales;
+
 	private Maquina maquina = null;
+
 	private TableView<TablaData> tableView;
 
 	@FXML
@@ -109,7 +112,8 @@ public class MenuController {
 			FXMLLoader fxmlLoader = new FXMLLoader();
 			fxmlLoader.setLocation(getClass().getResource("estadosFinales.fxml"));
 			Scene nuevaScene = new Scene(fxmlLoader.load(), 250, 250);
-			nuevaScene.setUserData(new EstadosFinales(maquina.getMaquina().getEstados_existentes()));
+			estadosFinales = new EstadosFinales(maquina);
+			nuevaScene.setUserData(estadosFinales);
 			nuevaScene.getStylesheets().add("/cl/cromer/mt/mt.css");
 			Stage stage = new Stage();
 			stage.initModality(Modality.WINDOW_MODAL);
@@ -158,7 +162,7 @@ public class MenuController {
 		FXMLLoader fxmlLoader = new FXMLLoader();
 		fxmlLoader.setLocation(getClass().getResource("lote.fxml"));
 		Scene scene = new Scene(fxmlLoader.load(), 640, 480);
-		scene.setUserData(maquina);
+		scene.setUserData(estadosFinales);
 		scene.getStylesheets().add("/cl/cromer/mt/mt.css");
 		Stage stage = new Stage();
 		stage.initModality(Modality.WINDOW_MODAL);

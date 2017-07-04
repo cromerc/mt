@@ -51,7 +51,7 @@ class Automata {
 				System.exit(1);
 			}
 		}
-		estados_existentes = new ArrayList<Integer>();
+		estados_existentes = new ArrayList<>();
 		for(int i=0 ; i < getEstados().size() ; i++){
 			if(getEstados().get(i) != null) estados_existentes.add(getEstados().get(i).getQ());
 		}

@@ -35,9 +35,10 @@ public class LoteController extends VBox {
 	@FXML
 	protected void runLote() throws Exception {
 		Scene scene = vboxLote.getScene();
-		Maquina maquina = (Maquina) scene.getUserData();
+		EstadosFinales estadosFinales = (EstadosFinales) scene.getUserData();
+		Maquina maquina = estadosFinales.getMaquina();
 		for (TablaData fila : tablaData) {
-			boolean exito = maquina.comprobarCadena(new StringBuilder(fila.getPrimer()), new int[] {5});
+			boolean exito = maquina.comprobarCadena(new StringBuilder(fila.getPrimer()), estadosFinales.getEstadosElegidos().stream().mapToInt(i -> i).toArray());
 			if (exito) {
 				fila.setSegundo("Aceptada");
 			}

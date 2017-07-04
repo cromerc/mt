@@ -14,6 +14,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 /**
  * Controlar las acciones cuando el usuario elige los estados finales
  */
@@ -21,10 +23,26 @@ public class EstadosFinalesController {
 	@FXML
 	private VBox contenido;
 
+	private EstadosFinales estadosFinales;
+
 	@FXML
 	public void elegir() {
-		Stage stage = (Stage) contenido.getScene().getWindow();
-		stage.close();
+		ArrayList<Integer> elegidos = new ArrayList<>();
+		for (int i = 0; i < estadosFinales.getEstadosExistents().size(); i++) {
+			CheckBox checkBox = (CheckBox) contenido.getScene().lookup("#q" + estadosFinales.getEstadosExistents().get(i));
+			if (checkBox.isSelected()) {
+				elegidos.add(i);
+			}
+		}
+
+		if (elegidos.size() > 0) {
+			estadosFinales.setEstadosElegidos(elegidos);
+			Stage stage = (Stage) contenido.getScene().getWindow();
+			stage.close();
+		}
+		else {
+			MT.mostrarMensaje("Elegir", "Usted tiene que elegir uno o mas estados finales!");
+		}
 	}
 
 	/**
@@ -32,7 +50,7 @@ public class EstadosFinalesController {
 	 */
 	public void handleWindowShownEvent() {
 		Stage stage = (Stage) contenido.getScene().getWindow();
-		EstadosFinales estadosFinales = (EstadosFinales) stage.getScene().getUserData();
+		estadosFinales = (EstadosFinales) stage.getScene().getUserData();
 
 		for (int i = 0; i < estadosFinales.getEstadosExistents().size(); i++) {
 			HBox hBox = new HBox();
@@ -42,6 +60,7 @@ public class EstadosFinalesController {
 			hBox.prefWidthProperty().bind(contenido.widthProperty());
 			hBox.prefHeightProperty().bind(contenido.heightProperty());
 			CheckBox checkBox = new CheckBox("q" + estadosFinales.getEstadosExistents().get(i));
+			checkBox.setId("q" + estadosFinales.getEstadosExistents().get(i));
 			hBox.getChildren().add(checkBox);
 			contenido.getChildren().add(hBox);
 		}

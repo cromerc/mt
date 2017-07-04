@@ -11,11 +11,13 @@ import java.util.ArrayList;
 
 public class EstadosFinales {
 	private ArrayList<Integer> estadosExistents;
-
 	private ArrayList<Integer> estadosElegidos;
 
-	public EstadosFinales(ArrayList<Integer> estadosExistents) {
-		this.estadosExistents = estadosExistents;
+	private Maquina maquina;
+
+	public EstadosFinales(Maquina maquina) {
+		this.maquina = maquina;
+		this.estadosExistents = maquina.getMaquina().getEstados_existentes();
 	}
 
 	public ArrayList<Integer> getEstadosExistents() {
@@ -32,5 +34,13 @@ public class EstadosFinales {
 
 	public void setEstadosElegidos(ArrayList<Integer> estadosElegidos) {
 		this.estadosElegidos = estadosElegidos;
+	}
+
+	public Maquina getMaquina() {
+		return maquina;
+	}
+
+	public void setMaquina(Maquina maquina) {
+		this.maquina = maquina;
 	}
 }

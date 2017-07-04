@@ -10,6 +10,7 @@ package cl.cromer.mt;
 import com.sun.javafx.scene.control.skin.TableHeaderRow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -24,9 +25,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.stage.FileChooser;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
+import javafx.stage.*;
 import org.w3c.dom.Document;
 
 import java.io.File;
@@ -57,12 +56,12 @@ public class MenuController {
 	@FXML
 	protected void cargarTransiciones() throws Exception {
 		Scene scene = menuBar.getScene();
-		Stage stage = (Stage) scene.getWindow();
+		Stage parentStage = (Stage) scene.getWindow();
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Abrir archivo XML");
 		fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivos XML (*.xml)", "*.xml"));
 		//fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("Archivos XML (*.xml)", "*.xml"));
-		File archivo = fileChooser.showOpenDialog(stage);
+		File archivo = fileChooser.showOpenDialog(parentStage);
 		LeerXML xml = new LeerXML();
 		Document documento = xml.leerArchivo(archivo);
 		if (documento != null) {
@@ -105,8 +104,31 @@ public class MenuController {
 			tableView.getColumns().get(1).setText("(qj,sj,movimiento)");
 
 			contenido.getChildren().add(tableView);
-		}else{
-			if(tableView != null) tableView.setItems(null);
+
+			// Obtener los estados finales:
+			FXMLLoader fxmlLoader = new FXMLLoader();
+			fxmlLoader.setLocation(getClass().getResource("estadosFinales.fxml"));
+			Scene nuevaScene = new Scene(fxmlLoader.load(), 250, 250);
+			nuevaScene.setUserData(new EstadosFinales(maquina.getMaquina().getEstados_existentes()));
+			nuevaScene.getStylesheets().add("/cl/cromer/mt/mt.css");
+			Stage stage = new Stage();
+			stage.initModality(Modality.WINDOW_MODAL);
+			stage.initOwner(parentStage);
+			stage.setTitle("Elegir Estados Finales");
+			stage.setScene(nuevaScene);
+			stage.setMinHeight(250);
+			stage.setMinWidth(250);
+			stage.getIcons().add(new Image(getClass().getResourceAsStream("/cl/cromer/mt/images/icon.png")));
+			final EstadosFinalesController estadosFinalesController = fxmlLoader.getController();
+			stage.addEventHandler(WindowEvent.WINDOW_SHOWN, window -> estadosFinalesController.handleWindowShownEvent());
+			stage.initStyle(StageStyle.UTILITY);
+			stage.setOnCloseRequest(Event::consume);
+			stage.show();
+		}
+		else {
+			if (tableView != null) {
+				tableView.setItems(null);
+			}
 			menuIndiv.setDisable(true);
 			menuLote.setDisable(true);
 			if(archivo != null) MT.mostrarMensaje("Error","El archivo "+ archivo.getName()+ " no es un xml valido");

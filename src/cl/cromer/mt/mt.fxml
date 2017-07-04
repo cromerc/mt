@@ -12,7 +12,6 @@ This file may not be copied, modified, propagated, or distributed except accordi
 <VBox xmlns:fx="http://javafx.com/fxml/1" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.92">
 	<fx:include source="menu.fxml"/>
 	<ScrollPane fitToHeight="true" fitToWidth="true" VBox.vgrow="ALWAYS">
-		<VBox alignment="CENTER" VBox.vgrow="ALWAYS" fx:id="contenido">
-		</VBox>
+		<VBox alignment="CENTER" VBox.vgrow="ALWAYS" fx:id="contenido"/>
 	</ScrollPane>
 </VBox>

@@ -12,5 +12,5 @@ El código se encuentra en la carpeta src o en github: [fundamentos](https://git
 
 ## JavaDoc
 
-La documentación del proyecto se puede ver en la carpeta doc o en la enlace: [JavaDoc](https://github.com/cromerc/fundamentos/doc/index.html)
+La documentación del proyecto se puede ver en la carpeta doc o en la enlace: [JavaDoc](https://cromer.cl/mt/doc/index.html)
 Vamos a cambiar la enlace a otra lugar despues, ignora que muestra el codigo.

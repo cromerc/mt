@@ -64,4 +64,12 @@ class Automata {
 	private void setEstados(ArrayList<Estado> estados) {
 		this.estados = estados;
 	}
+
+	public ArrayList<Integer> getEstados_existentes() {
+		return estados_existentes;
+	}
+
+	public void setEstados_existentes(ArrayList<Integer> estados_existentes) {
+		this.estados_existentes = estados_existentes;
+	}
 }

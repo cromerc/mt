@@ -36,11 +36,7 @@ class LeerXML {
 			MT.mostrarMensaje("Error", "Archivo " + archivo.getName() + " no existe!");
 			return null;
 		}
-		Document dc = createDocument(archivo);
-		if (dc == null) {
-			return validarXML(archivo);
-		}
-		return dc;
+		return createDocument(archivo);
 	}
 
 	/**
@@ -67,7 +63,7 @@ class LeerXML {
 			db.setErrorHandler(seh);
 			documento = db.parse(archivo);
 			if (seh.error) {
-				MT.mostrarMensaje("Error", "The file " + archivo.getName() + " does not contain valid xml!");
+				MT.mostrarMensaje("Error", "El archivo " + archivo.getName() + " no contiene xml valido!");
 				return null;
 			}
 			documento.getDocumentElement().normalize();
@@ -77,7 +73,7 @@ class LeerXML {
 			if (e.getMessage().contains(".dtd")) {
 				return validarXML(archivo);
 			}
-			MT.mostrarMensaje("Error", "The file " + archivo.getName() + " does not contain valid xml!");
+			MT.mostrarMensaje("Error", "El archivo " + archivo.getName() + " no contiene xml valido!");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 			return null;

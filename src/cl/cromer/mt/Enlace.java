@@ -5,7 +5,7 @@
  * This file may not be copied, modified, propagated, or distributed except according to the terms contained in the LICENSE file.
  */
 
-package mt;
+package cl.cromer.mt;
 
 class Enlace {
 	private char si;

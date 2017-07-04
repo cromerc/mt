@@ -5,7 +5,7 @@
  * This file may not be copied, modified, propagated, or distributed except according to the terms contained in the LICENSE file.
  */
 
-package mt;
+package cl.cromer.mt;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -57,11 +57,11 @@ public class MT extends Application {
 		primaryStage.setTitle("Maquina de Turing");
 
 		Scene scene = new Scene(root, 640, 480);
-		scene.getStylesheets().add("/mt/mt.css");
+		scene.getStylesheets().add("/cl/cromer/mt/mt.css");
 		primaryStage.setScene(scene);
 		primaryStage.setMinHeight(480);
 		primaryStage.setMinWidth(640);
-		primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/mt/images/icon.png")));
+		primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/cl/cromer/mt/images/icon.png")));
 		primaryStage.show();
 	}
 }

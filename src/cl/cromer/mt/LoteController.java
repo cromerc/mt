@@ -5,7 +5,7 @@
  * This file may not be copied, modified, propagated, or distributed except according to the terms contained in the LICENSE file.
  */
 
-package mt;
+package cl.cromer.mt;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -37,14 +37,14 @@ public class LoteController extends VBox {
 		Scene scene = vboxLote.getScene();
 		Maquina maquina = (Maquina) scene.getUserData();
 		for (TablaData fila : tablaData) {
-			Maquina clone = maquina.clone();
-			boolean exito = clone.comprobarCadena(new StringBuilder(fila.getPrimer()), new int[] {5});
+			boolean exito = maquina.comprobarCadena(new StringBuilder(fila.getPrimer()), new int[] {5});
 			if (exito) {
 				fila.setSegundo("Aceptada");
 			}
 			else {
 				fila.setSegundo("Rechazada");
 			}
+			maquina.reset();
 		}
 	}
 
@@ -53,17 +53,13 @@ public class LoteController extends VBox {
 	 */
 	@FXML
 	protected void agregarCadena() {
-		if (!cadena.getText().trim().equals("")) {
-			tablaData.add(new TablaData(cadena.getText(), ""));
-			Scene scene = vboxLote.getScene();
-			@SuppressWarnings("unchecked")
-			TableView<TablaData> tableView = (TableView<TablaData>) scene.lookup("#tableView");
-			tableView.setEditable(true);
-			tableView.setItems(tablaData);
-		}
-		else {
-			MT.mostrarMensaje("Error", "Ingresa una cadena por favor!");
-		}
+		tablaData.add(new TablaData(cadena.getText(), ""));
+		Scene scene = vboxLote.getScene();
+		@SuppressWarnings("unchecked")
+		TableView<TablaData> tableView = (TableView<TablaData>) scene.lookup("#tableView");
+		tableView.setEditable(true);
+		tableView.setItems(tablaData);
+		cadena.setText("");
 	}
 
 	/**

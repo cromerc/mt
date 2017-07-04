@@ -1,4 +1,4 @@
-package mt;
+package cl.cromer.mt;
 
 import javafx.beans.property.SimpleStringProperty;
 

@@ -3,10 +3,17 @@
     <output-path>$PROJECT_DIR$/out/artifacts/MaquinaTuring</output-path>
     <properties id="javafx-properties">
       <options>
-        <option name="appClass" value="mt.MT" />
+        <option name="appClass" value="cl.cromer.mt.MT" />
         <option name="description" value="" />
         <option name="height" value="480" />
         <option name="htmlPlaceholderId" value="" />
+        <option name="icons">
+          <JavaFxApplicationIcons>
+            <option name="linuxIcon" value="$PROJECT_DIR$/src/mt/images/icon.png" />
+            <option name="macIcon" value="$PROJECT_DIR$/src/mt/images/icon.icns" />
+            <option name="windowsIcon" value="$PROJECT_DIR$/src/mt/images/icon.ico" />
+          </JavaFxApplicationIcons>
+        </option>
         <option name="title" value="Maquina Turning" />
         <option name="vendor" value="" />
         <option name="version" value="" />
@@ -14,7 +21,7 @@
       </options>
     </properties>
     <root id="root">
-      <element id="archive" name="JavaFXApp.jar">
+      <element id="archive" name="MT.jar">
         <element id="module-output" name="Fundamentos" />
       </element>
     </root>

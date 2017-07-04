@@ -5,11 +5,11 @@
  * This file may not be copied, modified, propagated, or distributed except according to the terms contained in the LICENSE file.
  */
 
-package mt;
+package cl.cromer.mt;
 
 import org.w3c.dom.Document;
 
-class Maquina implements Cloneable {
+class Maquina {
 	private Automata maquina;
 	private Estado estadoactual;
 	private Enlace enlaceactual;
@@ -19,21 +19,6 @@ class Maquina implements Cloneable {
 	Maquina(Document document) {
 		maquina = new Automata(document);
 		reset();
-	}
-
-	@Override
-	public Maquina clone() {
-		try {
-			final Maquina result = (Maquina) super.clone();
-			result.maquina = this.maquina;
-			result.estadoactual = this.estadoactual;
-			result.enlaceactual = this.enlaceactual;
-			result.cintaanterior = this.cintaanterior;
-			return result;
-		}
-		catch (final CloneNotSupportedException e) {
-			throw new AssertionError();
-		}
 	}
 
 	Automata getMaquina() {return maquina;}
@@ -46,7 +31,7 @@ class Maquina implements Cloneable {
 
 	public int getCabezal() {return cabezal;}
 
-	public void reset(){
+	public void reset() {
 		estadoactual = maquina.getEstados().get(0);
 		enlaceactual = null;
 		cintaanterior = "";

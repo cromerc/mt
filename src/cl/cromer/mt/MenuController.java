@@ -5,7 +5,7 @@
  * This file may not be copied, modified, propagated, or distributed except according to the terms contained in the LICENSE file.
  */
 
-package mt;
+package cl.cromer.mt;
 
 import com.sun.javafx.scene.control.skin.TableHeaderRow;
 import javafx.collections.FXCollections;
@@ -127,7 +127,7 @@ public class MenuController {
 		fxmlLoader.setLocation(getClass().getResource("lote.fxml"));
 		Scene scene = new Scene(fxmlLoader.load(), 640, 480);
 		scene.setUserData(maquina);
-		scene.getStylesheets().add("/mt/mt.css");
+		scene.getStylesheets().add("/cl/cromer/mt/mt.css");
 		Stage stage = new Stage();
 		stage.initModality(Modality.WINDOW_MODAL);
 		stage.initOwner(parentStage);
@@ -135,7 +135,7 @@ public class MenuController {
 		stage.setMinHeight(480);
 		stage.setMinWidth(640);
 		stage.setScene(scene);
-		stage.getIcons().add(new Image(getClass().getResourceAsStream("/mt/images/icon.png")));
+		stage.getIcons().add(new Image(getClass().getResourceAsStream("/cl/cromer/mt/images/icon.png")));
 		stage.show();
 
 		TableView<TablaData> tableView = FXMLLoader.load(getClass().getResource("tabla.fxml"));

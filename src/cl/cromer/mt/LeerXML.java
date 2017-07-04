@@ -5,7 +5,7 @@
  * This file may not be copied, modified, propagated, or distributed except according to the terms contained in the LICENSE file.
  */
 
-package mt;
+package cl.cromer.mt;
 
 import jdk.internal.org.xml.sax.ErrorHandler;
 import jdk.internal.org.xml.sax.SAXException;
@@ -67,6 +67,7 @@ class LeerXML {
 			db.setErrorHandler(seh);
 			documento = db.parse(archivo);
 			if (seh.error) {
+				MT.mostrarMensaje("Error", "The file " + archivo.getName() + " does not contain valid xml!");
 				return null;
 			}
 			documento.getDocumentElement().normalize();
@@ -76,6 +77,7 @@ class LeerXML {
 			if (e.getMessage().contains(".dtd")) {
 				return validarXML(archivo);
 			}
+			MT.mostrarMensaje("Error", "The file " + archivo.getName() + " does not contain valid xml!");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 			return null;

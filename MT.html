@@ -1,0 +1,43 @@
+<html>
+	<title>Turing Machine</title>
+	<head>
+		<script src="https://java.com/js/dtjava.js"></script>
+		<script>window.dtjava || document.write('<script src="dtjava.js"><\/script>')</script>
+		<script>
+            function launchApplication(jnlpfile) {
+                dtjava.launch({
+                        url: jnlpfile
+                    },
+                    {
+                        javafx: '8.0+'
+                    },
+                    {}
+                );
+                return false;
+            }
+		</script>
+		<script>
+            function javafxEmbedMT_id() {
+                dtjava.embed(
+                    {
+                        id: 'MT_id',
+                        url: 'MT.jnlp',
+                        placeholder: 'javafx-app-placeholder',
+                        width: '640',
+                        height: '480'
+                    },
+                    {
+                        javafx: '8.0+'
+                    },
+                    {}
+                );
+            }
+            <!-- Embed FX application into web page once page is loaded -->
+            dtjava.addOnloadCallback(javafxEmbedMT_id);
+		</script>
+	</head>
+	<body>
+		<!-- Applet will be inserted here -->
+		<div id='javafx-app-placeholder'></div>
+	</body>
+</html>

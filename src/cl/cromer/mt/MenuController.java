@@ -116,6 +116,8 @@ public class MenuController {
 
 	/**
 	 * Menu opción reconocimiento lote
+	 *
+	 * @throws Exception La excepción
 	 */
 	@FXML
 	@SuppressWarnings("unchecked")

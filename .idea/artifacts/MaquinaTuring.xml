@@ -9,9 +9,9 @@
         <option name="htmlPlaceholderId" value="" />
         <option name="icons">
           <JavaFxApplicationIcons>
-            <option name="linuxIcon" value="$PROJECT_DIR$/src/mt/images/icon.png" />
-            <option name="macIcon" value="$PROJECT_DIR$/src/mt/images/icon.icns" />
-            <option name="windowsIcon" value="$PROJECT_DIR$/src/mt/images/icon.ico" />
+            <option name="linuxIcon" value="$PROJECT_DIR$/src/cl/cromer/mt/images/icon.png" />
+            <option name="macIcon" value="$PROJECT_DIR$/src/cl/cromer/mt/images/icon.icns" />
+            <option name="windowsIcon" value="$PROJECT_DIR$/src/cl/cromer/mt/images/icon.ico" />
           </JavaFxApplicationIcons>
         </option>
         <option name="nativeBundle" value="all" />

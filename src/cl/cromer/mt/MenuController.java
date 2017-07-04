@@ -38,6 +38,7 @@ import java.util.regex.Pattern;
  */
 public class MenuController {
 	private Maquina maquina = null;
+	private TableView<TablaData> tableView;
 
 	@FXML
 	private MenuBar menuBar;
@@ -59,6 +60,8 @@ public class MenuController {
 		Stage stage = (Stage) scene.getWindow();
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Abrir archivo XML");
+		fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivos XML (*.xml)", "*.xml"));
+		//fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("Archivos XML (*.xml)", "*.xml"));
 		File archivo = fileChooser.showOpenDialog(stage);
 		LeerXML xml = new LeerXML();
 		Document documento = xml.leerArchivo(archivo);
@@ -79,7 +82,7 @@ public class MenuController {
 				menuIndiv.setDisable(false);
 				menuLote.setDisable(false);
 			}
-			TableView<TablaData> tableView = FXMLLoader.load(getClass().getResource("tabla.fxml"));
+			tableView = FXMLLoader.load(getClass().getResource("tabla.fxml"));
 			VBox.setVgrow(tableView, Priority.ALWAYS);
 			tableView.skinProperty().addListener((source, oldWidth, newWidth) -> {
 				final TableHeaderRow header = (TableHeaderRow) tableView.lookup("TableHeaderRow");
@@ -95,7 +98,6 @@ public class MenuController {
 					tablaData.add(new TablaData(matcher.group(1), matcher.group(2)));
 				}
 			}
-
 			tableView.setEditable(true);
 			tableView.setItems(tablaData);
 
@@ -104,7 +106,11 @@ public class MenuController {
 
 			contenido.getChildren().add(tableView);
 		}else{
-			MT.mostrarMensaje("Error","El archivo "+ archivo.getName()+ " no es un xml valido");
+			if(tableView != null) tableView.setItems(null);
+			menuIndiv.setDisable(true);
+			menuLote.setDisable(true);
+			if(archivo != null) MT.mostrarMensaje("Error","El archivo "+ archivo.getName()+ " no es un xml valido");
+			else MT.mostrarMensaje("Aviso","No se ha seleccionado archivo");
 		}
 	}
 

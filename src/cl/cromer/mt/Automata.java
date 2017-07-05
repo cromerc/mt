@@ -13,7 +13,8 @@ import java.util.ArrayList;
 
 class Automata {
 	private ArrayList<Estado> estados;
-	private ArrayList<Integer> estados_existentes;
+
+	private ArrayList<Integer> estadosExistentes;
 
 	Automata(Document document) {
 		setEstados(new ArrayList<>());
@@ -51,9 +52,11 @@ class Automata {
 				System.exit(1);
 			}
 		}
-		estados_existentes = new ArrayList<>();
-		for(int i=0 ; i < getEstados().size() ; i++){
-			if(getEstados().get(i) != null) estados_existentes.add(getEstados().get(i).getQ());
+		estadosExistentes = new ArrayList<>();
+		for (int i = 0; i < getEstados().size(); i++) {
+			if (getEstados().get(i) != null) {
+				getEstadosExistentes().add(getEstados().get(i).getQ());
+			}
 		}
 	}
 
@@ -65,11 +68,11 @@ class Automata {
 		this.estados = estados;
 	}
 
-	public ArrayList<Integer> getEstados_existentes() {
-		return estados_existentes;
+	ArrayList<Integer> getEstadosExistentes() {
+		return estadosExistentes;
 	}
 
-	public void setEstados_existentes(ArrayList<Integer> estados_existentes) {
-		this.estados_existentes = estados_existentes;
+	public void setEstadosExistentes(ArrayList<Integer> estadosExistentes) {
+		this.estadosExistentes = estadosExistentes;
 	}
 }

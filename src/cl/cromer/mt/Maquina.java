@@ -10,10 +10,13 @@ package cl.cromer.mt;
 import org.w3c.dom.Document;
 
 class Maquina {
-	private Automata maquina;
-	private Estado estadoactual;
-	private Enlace enlaceactual;
-	private String cintaanterior;
+	private final Automata maquina;
+
+	private Estado estadoActual;
+
+	private Enlace enlaceActual;
+
+	private String cintaAnterior;
 	private int cabezal;
 
 	Maquina(Document document) {
@@ -21,54 +24,80 @@ class Maquina {
 		reset();
 	}
 
-	Automata getMaquina() {return maquina;}
+	Automata getMaquina() {
+		return maquina;
+	}
 
-	public Estado getEstadoactual() {return estadoactual;}
+	private Estado getEstadoActual() {
+		return estadoActual;
+	}
 
-	public Enlace getEnlaceactual() {return enlaceactual;}
+	private void setEstadoActual(Estado estadoActual) {
+		this.estadoActual = estadoActual;
+	}
 
-	public String getCintaanterior() {return cintaanterior;}
+	private Enlace getEnlaceActual() {
+		return enlaceActual;
+	}
 
-	public int getCabezal() {return cabezal;}
+	private void setEnlaceActual(Enlace enlaceActual) {
+		this.enlaceActual = enlaceActual;
+	}
 
-	public void reset() {
-		estadoactual = maquina.getEstados().get(0);
-		enlaceactual = null;
-		cintaanterior = "";
-		cabezal = 0;
+	private String getCintaAnterior() {
+		return cintaAnterior;
+	}
+
+	private void setCintaAnterior(String cintaAnterior) {
+		this.cintaAnterior = cintaAnterior;
+	}
+
+	private int getCabezal() {
+		return cabezal;
+	}
+
+	private void setCabezal(int cabezal) {
+		this.cabezal = cabezal;
+	}
+
+	void reset() {
+		setEstadoActual(maquina.getEstados().get(0));
+		setEnlaceActual(null);
+		setCintaAnterior("");
+		setCabezal(0);
 	}
 
 	boolean comprobarCadena(StringBuilder cinta, int[] estadoFinal) {
-		//estadoactual = maquina.getEstados().get(0);
+		//estadoActual = maquina.getEstados().get(0);
 		int i;
-		for (i = 0; i < estadoactual.getEnlaces().size(); i++) {
-			if (estadoactual.getEnlaces().get(i).getSi() == cinta.charAt(cabezal)) {
-				enlaceactual = estadoactual.getEnlaces().get(i);
-				cinta.setCharAt(cabezal, enlaceactual.getSj());
-				switch (enlaceactual.getMovimiento()) {
+		for (i = 0; i < getEstadoActual().getEnlaces().size(); i++) {
+			if (getEstadoActual().getEnlaces().get(i).getSi() == cinta.charAt(getCabezal())) {
+				setEnlaceActual(getEstadoActual().getEnlaces().get(i));
+				cinta.setCharAt(getCabezal(), getEnlaceActual().getSj());
+				switch (getEnlaceActual().getMovimiento()) {
 					case 'L': {
-						cabezal--;
-						if (cabezal == (-1)) {
+						setCabezal(getCabezal() - 1);
+						if (getCabezal() == (-1)) {
 							cinta.insert(0, "#");
-							cabezal++;
+							setCabezal(getCabezal() + 1);
 						}
 						break;
 					}
 					case 'R': {
-						cabezal++;
-						if (cabezal == cinta.length()) {
-							cinta.insert(cabezal, "#");
+						setCabezal(getCabezal() + 1);
+						if (getCabezal() == cinta.length()) {
+							cinta.insert(getCabezal(), "#");
 						}
 						break;
 					}
 					default: {/*Se mantiene*/}
 				}
-				estadoactual = enlaceactual.getQj();
+				setEstadoActual(getEnlaceActual().getQj());
 				i = -1;
 			}
 		}
-		for(i=0;i<estadoFinal.length;i++){
-			if(estadoactual.getQ() == estadoFinal[i]){
+		for (i = 0; i < estadoFinal.length; i++) {
+			if (getEstadoActual().getQ() == estadoFinal[i]) {
 				reset();
 				return true;
 			}
@@ -78,26 +107,26 @@ class Maquina {
 	}
 
 	boolean comprobarCadenaS2S(StringBuilder cinta, int[] estadoFinal){
-		cintaanterior = cinta.toString();
+		setCintaAnterior(cinta.toString());
 		int i;
-		for (i = 0; i < estadoactual.getEnlaces().size(); i++) {
-			if (estadoactual.getEnlaces().get(i).getSi() == cinta.charAt(cabezal)) {
-				enlaceactual = estadoactual.getEnlaces().get(i);
-				estadoactual = enlaceactual.getQj();
-				cinta.setCharAt(cabezal, enlaceactual.getSj());
-				switch (enlaceactual.getMovimiento()) {
+		for (i = 0; i < getEstadoActual().getEnlaces().size(); i++) {
+			if (getEstadoActual().getEnlaces().get(i).getSi() == cinta.charAt(getCabezal())) {
+				setEnlaceActual(getEstadoActual().getEnlaces().get(i));
+				setEstadoActual(getEnlaceActual().getQj());
+				cinta.setCharAt(getCabezal(), getEnlaceActual().getSj());
+				switch (getEnlaceActual().getMovimiento()) {
 					case 'L': {
-						cabezal--;
-						if (cabezal == (-1)) {
+						setCabezal(getCabezal() - 1);
+						if (getCabezal() == (-1)) {
 							cinta.insert(0, "#");
-							cabezal++;
+							setCabezal(getCabezal() + 1);
 						}
 						break;
 					}
 					case 'R': {
-						cabezal++;
-						if (cabezal == cinta.length()) {
-							cinta.insert(cabezal, "#");
+						setCabezal(getCabezal() + 1);
+						if (getCabezal() == cinta.length()) {
+							cinta.insert(getCabezal(), "#");
 						}
 						break;
 					}
@@ -106,9 +135,9 @@ class Maquina {
 				return true;
 			}
 		}
-		for(i=0;i<estadoFinal.length;i++){
-			if(estadoactual.getQ() == estadoFinal[i]){
-				enlaceactual = null; // Indicar que no hay más transiciones
+		for (i = 0; i < estadoFinal.length; i++) {
+			if (getEstadoActual().getQ() == estadoFinal[i]) {
+				setEnlaceActual(null);  // Indicar que no hay más transiciones
 				return true;
 			}
 		}

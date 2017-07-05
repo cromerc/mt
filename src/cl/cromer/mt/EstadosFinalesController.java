@@ -25,11 +25,14 @@ public class EstadosFinalesController {
 
 	private EstadosFinales estadosFinales;
 
+	/**
+	 * El metodo llamado cuando el usuario hace click en elegir
+	 */
 	@FXML
 	public void elegir() {
 		ArrayList<Integer> elegidos = new ArrayList<>();
-		for (int i = 0; i < estadosFinales.getEstadosExistents().size(); i++) {
-			CheckBox checkBox = (CheckBox) contenido.getScene().lookup("#q" + estadosFinales.getEstadosExistents().get(i));
+		for (int i = 0; i < estadosFinales.getEstadosExistentes().size(); i++) {
+			CheckBox checkBox = (CheckBox) contenido.getScene().lookup("#q" + estadosFinales.getEstadosExistentes().get(i));
 			if (checkBox.isSelected()) {
 				elegidos.add(i);
 			}
@@ -46,21 +49,21 @@ public class EstadosFinalesController {
 	}
 
 	/**
-	 * Este metodo es para el evento de windowshown.
+	 * Este metodo es para el evento de windowshown
 	 */
-	public void handleWindowShownEvent() {
+	void handleWindowShownEvent() {
 		Stage stage = (Stage) contenido.getScene().getWindow();
 		estadosFinales = (EstadosFinales) stage.getScene().getUserData();
 
-		for (int i = 0; i < estadosFinales.getEstadosExistents().size(); i++) {
+		for (int i = 0; i < estadosFinales.getEstadosExistentes().size(); i++) {
 			HBox hBox = new HBox();
 			hBox.setAlignment(Pos.CENTER);
 			hBox.prefWidthProperty().bind(contenido.prefWidthProperty());
 			hBox.prefHeightProperty().bind(contenido.prefHeightProperty());
 			hBox.prefWidthProperty().bind(contenido.widthProperty());
 			hBox.prefHeightProperty().bind(contenido.heightProperty());
-			CheckBox checkBox = new CheckBox("q" + estadosFinales.getEstadosExistents().get(i));
-			checkBox.setId("q" + estadosFinales.getEstadosExistents().get(i));
+			CheckBox checkBox = new CheckBox("q" + estadosFinales.getEstadosExistentes().get(i));
+			checkBox.setId("q" + estadosFinales.getEstadosExistentes().get(i));
 			hBox.getChildren().add(checkBox);
 			contenido.getChildren().add(hBox);
 		}

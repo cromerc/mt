@@ -9,37 +9,72 @@ package cl.cromer.mt;
 
 import java.util.ArrayList;
 
-public class EstadosFinales {
-	private ArrayList<Integer> estadosExistents;
+/**
+ * Esta clase es un objeto para pasar entre los stage.
+ */
+class EstadosFinales {
+	private ArrayList<Integer> estadosExistentes;
 	private ArrayList<Integer> estadosElegidos;
 
 	private Maquina maquina;
 
-	public EstadosFinales(Maquina maquina) {
+	/**
+	 * Constructor de la clase que recibe una maquina de turning
+	 *
+	 * @param maquina La maquina de turning a pasar entre stages
+	 */
+	EstadosFinales(Maquina maquina) {
 		this.maquina = maquina;
-		this.estadosExistents = maquina.getMaquina().getEstados_existentes();
+		this.estadosExistentes = maquina.getMaquina().getEstadosExistentes();
 	}
 
-	public ArrayList<Integer> getEstadosExistents() {
-		return estadosExistents;
+	/**
+	 * Devolver los estados que existen
+	 *
+	 * @return Los estados que existen
+	 */
+	ArrayList<Integer> getEstadosExistentes() {
+		return estadosExistentes;
 	}
 
-	public void setEstadosExistents(ArrayList<Integer> estadosExistents) {
-		this.estadosExistents = estadosExistents;
+	/**
+	 * Cambiar los estados que existen
+	 *
+	 * @param estadosExistentes Los estados nuevos
+	 */
+	public void setEstadosExistentes(ArrayList<Integer> estadosExistentes) {
+		this.estadosExistentes = estadosExistentes;
 	}
 
-	public ArrayList<Integer> getEstadosElegidos() {
+	/**
+	 * Devolver los estados elegidos por el usuario
+	 * @return Los estados elegidos
+	 */
+	ArrayList<Integer> getEstadosElegidos() {
 		return estadosElegidos;
 	}
 
-	public void setEstadosElegidos(ArrayList<Integer> estadosElegidos) {
+	/**
+	 * Cambiar los estados elegidos por el usuario
+	 *
+	 * @param estadosElegidos Los estados elegidods nuevos
+	 */
+	void setEstadosElegidos(ArrayList<Integer> estadosElegidos) {
 		this.estadosElegidos = estadosElegidos;
 	}
 
+	/**
+	 * Devolver la maquina de turning para usar
+	 * @return La maquina de turning
+	 */
 	public Maquina getMaquina() {
 		return maquina;
 	}
 
+	/**
+	 * Cambiar la maquina de turning del objeto
+	 * @param maquina La maquina
+	 */
 	public void setMaquina(Maquina maquina) {
 		this.maquina = maquina;
 	}

@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 public class Estado {
 	private final int q;
-
 	private final ArrayList<Enlace> enlaces;
 
 	Estado(int q) {

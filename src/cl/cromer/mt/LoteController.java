@@ -20,13 +20,13 @@ import javafx.stage.Stage;
  * Controlar las acciones de reconocimiento por lote
  */
 public class LoteController extends VBox {
+	private final ObservableList<TablaData> tablaData = FXCollections.observableArrayList();
+
 	@FXML
-	private VBox vboxLote;
+	private VBox contenido;
 
 	@FXML
 	private TextField cadena;
-
-	private ObservableList<TablaData> tablaData = FXCollections.observableArrayList();
 
 	/**
 	 * Boton de run MT
@@ -34,16 +34,16 @@ public class LoteController extends VBox {
 	 */
 	@FXML
 	protected void runLote() throws Exception {
-		Scene scene = vboxLote.getScene();
+		Scene scene = contenido.getScene();
 		EstadosFinales estadosFinales = (EstadosFinales) scene.getUserData();
 		Maquina maquina = estadosFinales.getMaquina();
 		for (TablaData fila : tablaData) {
-			boolean exito = maquina.comprobarCadena(new StringBuilder(fila.getPrimer()), estadosFinales.getEstadosElegidos().stream().mapToInt(i -> i).toArray());
+			boolean exito = maquina.comprobarCadena(new StringBuilder(fila.getPrimera()), estadosFinales.getEstadosElegidos().stream().mapToInt(i -> i).toArray());
 			if (exito) {
-				fila.setSegundo("Aceptada");
+				fila.setSegunda("Aceptada");
 			}
 			else {
-				fila.setSegundo("Rechazada");
+				fila.setSegunda("Rechazada");
 			}
 			maquina.reset();
 		}
@@ -55,7 +55,7 @@ public class LoteController extends VBox {
 	@FXML
 	protected void agregarCadena() {
 		tablaData.add(new TablaData(cadena.getText(), ""));
-		Scene scene = vboxLote.getScene();
+		Scene scene = contenido.getScene();
 		@SuppressWarnings("unchecked")
 		TableView<TablaData> tableView = (TableView<TablaData>) scene.lookup("#tableView");
 		tableView.setEditable(true);
@@ -68,7 +68,7 @@ public class LoteController extends VBox {
 	 */
 	@FXML
 	protected void cerrar() {
-		Scene scene = vboxLote.getScene();
+		Scene scene = contenido.getScene();
 		Stage stage = (Stage) scene.getWindow();
 		stage.close();
 	}

@@ -9,11 +9,8 @@ package cl.cromer.mt;
 
 class Enlace {
 	private char si;
-
 	private char sj;
-
 	private char movimiento;
-
 	private Estado qj;
 
 	Enlace(char si, Estado qj, char sj, char move) {

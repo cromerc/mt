@@ -15,12 +15,12 @@ This file may not be copied, modified, propagated, or distributed except accordi
 	<columns>
 		<TableColumn sortable="false">
 			<cellValueFactory>
-				<PropertyValueFactory property="primer"/>
+				<PropertyValueFactory property="primera"/>
 			</cellValueFactory>
 		</TableColumn>
 		<TableColumn sortable="false">
 			<cellValueFactory>
-				<PropertyValueFactory property="segundo"/>
+				<PropertyValueFactory property="segunda"/>
 			</cellValueFactory>
 		</TableColumn>
 	</columns>

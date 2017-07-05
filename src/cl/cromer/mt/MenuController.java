@@ -36,9 +36,7 @@ import java.util.regex.Pattern;
  * Controlar las acciones cuando una opción es elegido en el menu.
  */
 public class MenuController {
-	protected EstadosFinales estadosFinales;
-
-	private Maquina maquina = null;
+	private EstadosFinales estadosFinales;
 
 	private TableView<TablaData> tableView;
 
@@ -68,7 +66,7 @@ public class MenuController {
 		LeerXML xml = new LeerXML();
 		Document documento = xml.leerArchivo(archivo);
 		if (documento != null) {
-			maquina = new Maquina(documento);
+			Maquina maquina = new Maquina(documento);
 			TableView temp = (TableView) scene.lookup("#tableView");
 			VBox contenido = (VBox) scene.lookup("#contenido");
 			if (temp != null) {
@@ -185,7 +183,7 @@ public class MenuController {
 		TableColumn<TablaData, String> columna1 = (TableColumn<TablaData, String>) tableView.getColumns().get(0);
 		columna1.setCellFactory(TextFieldTableCell.forTableColumn());
 		columna1.setOnEditCommit(
-				columna -> columna.getTableView().getItems().get(columna.getTablePosition().getRow()).setPrimer(columna.getNewValue())
+				columna -> columna.getTableView().getItems().get(columna.getTablePosition().getRow()).setPrimera(columna.getNewValue())
 		);
 
 		tableView.getColumns().get(0).setText("Cadena");
@@ -193,7 +191,7 @@ public class MenuController {
 		tableView.getColumns().get(1).setText("Aceptada/Rechazada");
 		tableView.getColumns().get(1).setEditable(false);
 
-		VBox contenido = (VBox) scene.lookup("#contenidoLote");
+		VBox contenido = (VBox) scene.lookup("#contenido");
 		contenido.getChildren().add(tableView);
 	}
 }

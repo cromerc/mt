@@ -208,7 +208,7 @@
 			<exclude name="MT.jar"/>
 		</fx:fileset>
 		<fx:fileset id="all_MT" dir="${artifact.temp.output.MT}" includes="**/*.jar"/>
-		<fx:application id="MT_id" name="MaquinaTuring" mainClass="mt.MT"/>
+		<fx:application id="MT_id" name="MaquinaTuring" mainClass="cl.cromer.mt.MT"/>
 		<fx:jar destfile="${artifact.temp.output.MT}/MT.jar">
 			<fx:application refid="MT_id"/>
 			<fileset dir="${artifact.temp.output.MT}" excludes="**/*.jar"/>
@@ -221,9 +221,25 @@
 				<attribute name="Implementation-Vendor" value=""/>
 			</manifest>
 		</fx:jar>
-		<fx:deploy width="640" height="480" updatemode="background" outdir="${artifact.temp.output.MT}/deploy" outfile="MT">
+		<condition property="app.icon.path" value="${basedir}/src/cl/cromer/mt/images/icon.png">
+			<and>
+				<os family="unix"/>
+				<not>
+					<os family="mac"/>
+				</not>
+			</and>
+		</condition>
+		<condition property="app.icon.path" value="${basedir}/src/cl/cromer/mt/images/icon.icns">
+			<os family="mac"/>
+		</condition>
+		<condition property="app.icon.path" value="${basedir}/src/cl/cromer/mt/images/icon.ico">
+			<os family="windows"/>
+		</condition>
+		<fx:deploy width="640" height="480" updatemode="background" outdir="${artifact.temp.output.MT}/deploy" outfile="MT" nativeBundles="all">
 			<fx:application refid="MT_id"/>
-			<fx:info title="Maquina Turning"/>
+			<fx:info title="Maquina Turning">
+				<fx:icon href="${app.icon.path}"/>
+			</fx:info>
 			<fx:resources>
 				<fx:fileset refid="all_MT"/>
 			</fx:resources>

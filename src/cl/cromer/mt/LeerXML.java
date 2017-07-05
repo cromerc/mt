@@ -38,7 +38,7 @@ class LeerXML {
 			return null;
 		}
 		Document dc = createDocument(archivo);
-		if(dc == null) {
+		if (dc == null) {
 			error = false;
 			return validarXML(archivo);
 		}

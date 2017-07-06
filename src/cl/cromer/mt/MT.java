@@ -53,11 +53,11 @@ public class MT extends Application {
 	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Parent root = FXMLLoader.load(getClass().getResource("mt.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("fxml/mt.fxml"));
 		primaryStage.setTitle("Maquina de Turing");
 
 		Scene scene = new Scene(root, 640, 480);
-		scene.getStylesheets().add("/cl/cromer/mt/mt.css");
+		scene.getStylesheets().add("/cl/cromer/mt/css/mt.css");
 		primaryStage.setScene(scene);
 		primaryStage.setMinHeight(480);
 		primaryStage.setMinWidth(640);

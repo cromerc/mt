@@ -12,7 +12,7 @@ import java.util.ArrayList;
 /**
  * Esta clase es un objeto para pasar entre los stage.
  */
-class EstadosFinales {
+public class EstadosFinales {
 	private ArrayList<Integer> estadosExistentes;
 	private ArrayList<Integer> estadosElegidos;
 
@@ -23,7 +23,7 @@ class EstadosFinales {
 	 *
 	 * @param maquina La maquina de turning a pasar entre stages
 	 */
-	EstadosFinales(Maquina maquina) {
+	public EstadosFinales(Maquina maquina) {
 		this.maquina = maquina;
 		this.estadosExistentes = maquina.getMaquina().getEstadosExistentes();
 	}
@@ -33,7 +33,7 @@ class EstadosFinales {
 	 *
 	 * @return Los estados que existen
 	 */
-	ArrayList<Integer> getEstadosExistentes() {
+	public ArrayList<Integer> getEstadosExistentes() {
 		return estadosExistentes;
 	}
 
@@ -50,7 +50,7 @@ class EstadosFinales {
 	 * Devolver los estados elegidos por el usuario
 	 * @return Los estados elegidos
 	 */
-	ArrayList<Integer> getEstadosElegidos() {
+	public ArrayList<Integer> getEstadosElegidos() {
 		return estadosElegidos;
 	}
 
@@ -59,7 +59,7 @@ class EstadosFinales {
 	 *
 	 * @param estadosElegidos Los estados elegidods nuevos
 	 */
-	void setEstadosElegidos(ArrayList<Integer> estadosElegidos) {
+	public void setEstadosElegidos(ArrayList<Integer> estadosElegidos) {
 		this.estadosElegidos = estadosElegidos;
 	}
 

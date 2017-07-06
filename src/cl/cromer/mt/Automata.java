@@ -11,12 +11,11 @@ import org.w3c.dom.Document;
 
 import java.util.ArrayList;
 
-class Automata {
+public class Automata {
 	private ArrayList<Estado> estados;
-
 	private ArrayList<Integer> estadosExistentes;
 
-	Automata(Document document) {
+	public Automata(Document document) {
 		setEstados(new ArrayList<>());
 		for (int i = 0; i < document.getElementsByTagName("transicion").getLength(); i++) {
 			char move = document.getElementsByTagName("movimiento").item(i).getTextContent().charAt(0);
@@ -60,15 +59,15 @@ class Automata {
 		}
 	}
 
-	ArrayList<Estado> getEstados() {
+	public ArrayList<Estado> getEstados() {
 		return estados;
 	}
 
-	private void setEstados(ArrayList<Estado> estados) {
+	public void setEstados(ArrayList<Estado> estados) {
 		this.estados = estados;
 	}
 
-	ArrayList<Integer> getEstadosExistentes() {
+	public ArrayList<Integer> getEstadosExistentes() {
 		return estadosExistentes;
 	}
 

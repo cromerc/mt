@@ -82,7 +82,7 @@ public class MenuController {
 				menuIndiv.setDisable(false);
 				menuLote.setDisable(false);
 			}
-			tableView = FXMLLoader.load(getClass().getResource("tabla.fxml"));
+			tableView = FXMLLoader.load(getClass().getResource("/cl/cromer/mt/fxml/tabla.fxml"));
 			VBox.setVgrow(tableView, Priority.ALWAYS);
 			tableView.skinProperty().addListener((source, oldWidth, newWidth) -> {
 				final TableHeaderRow header = (TableHeaderRow) tableView.lookup("TableHeaderRow");
@@ -108,11 +108,11 @@ public class MenuController {
 
 			// Obtener los estados finales:
 			FXMLLoader fxmlLoader = new FXMLLoader();
-			fxmlLoader.setLocation(getClass().getResource("estadosFinales.fxml"));
+			fxmlLoader.setLocation(getClass().getResource("/cl/cromer/mt/fxml/estadosFinales.fxml"));
 			Scene nuevaScene = new Scene(fxmlLoader.load(), 250, 250);
 			estadosFinales = new EstadosFinales(maquina);
 			nuevaScene.setUserData(estadosFinales);
-			nuevaScene.getStylesheets().add("/cl/cromer/mt/mt.css");
+			nuevaScene.getStylesheets().add("/cl/cromer/mt/css/mt.css");
 			Stage stage = new Stage();
 			stage.initModality(Modality.WINDOW_MODAL);
 			stage.initOwner(parentStage);
@@ -158,10 +158,10 @@ public class MenuController {
 		Stage parentStage = (Stage) parentScene.getWindow();
 
 		FXMLLoader fxmlLoader = new FXMLLoader();
-		fxmlLoader.setLocation(getClass().getResource("lote.fxml"));
+		fxmlLoader.setLocation(getClass().getResource("/cl/cromer/mt/fxml/lote.fxml"));
 		Scene scene = new Scene(fxmlLoader.load(), 640, 480);
 		scene.setUserData(estadosFinales);
-		scene.getStylesheets().add("/cl/cromer/mt/mt.css");
+		scene.getStylesheets().add("/cl/cromer/mt/css/mt.css");
 		Stage stage = new Stage();
 		stage.initModality(Modality.WINDOW_MODAL);
 		stage.initOwner(parentStage);
@@ -172,7 +172,7 @@ public class MenuController {
 		stage.getIcons().add(new Image(getClass().getResourceAsStream("/cl/cromer/mt/images/icon.png")));
 		stage.show();
 
-		TableView<TablaData> tableView = FXMLLoader.load(getClass().getResource("tabla.fxml"));
+		TableView<TablaData> tableView = FXMLLoader.load(getClass().getResource("/cl/cromer/mt/fxml/tabla.fxml"));
 		VBox.setVgrow(tableView, Priority.ALWAYS);
 		tableView.skinProperty().addListener((source, oldWidth, newWidth) -> {
 			final TableHeaderRow header = (TableHeaderRow) tableView.lookup("TableHeaderRow");

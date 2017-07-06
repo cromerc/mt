@@ -7,9 +7,6 @@
 
 package cl.cromer.mt;
 
-import jdk.internal.org.xml.sax.ErrorHandler;
-import jdk.internal.org.xml.sax.SAXException;
-import jdk.internal.org.xml.sax.SAXParseException;
 import org.w3c.dom.Document;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -20,8 +17,6 @@ import java.io.*;
  * Esta clase puede abrir y validar un archivo de XML. Se necesita un archivo mtbase.dtd
  */
 class LeerXML {
-
-	private boolean error = false;
 	/**
 	 * El metodo va a verificar que el archivo existe y que contiene XML valido. Si es valido devuelve el documento.
 	 *
@@ -39,7 +34,6 @@ class LeerXML {
 		}
 		Document dc = createDocument(archivo);
 		if (dc == null) {
-			error = false;
 			return validarXML(archivo);
 		}
 		return dc;
@@ -65,13 +59,7 @@ class LeerXML {
 			dbf.setNamespaceAware(true);
 
 			DocumentBuilder db = dbf.newDocumentBuilder();
-			SimpleErrorHandler seh = new SimpleErrorHandler();
-			db.setErrorHandler(seh);
 			documento = db.parse(archivo);
-			if (error) {
-				//MT.mostrarMensaje("Error", "El archivo " + archivo.getName() + " no contiene xml valido!");
-				return null;
-			}
 			documento.getDocumentElement().normalize();
 			return documento;
 		}
@@ -139,78 +127,5 @@ class LeerXML {
 			return null;
 		}
 		return temp;
-	}
-
-	/**
-	 * Esta clase se usa para comprobar que el XML es valido.
-	 */
-	class SimpleErrorHandler implements ErrorHandler, org.xml.sax.ErrorHandler {
-
-		/**
-		 * Un warning
-		 *
-		 * @param e La excepción
-		 *
-		 * @throws SAXException La excepción thrown
-		 */
-		public void warning(SAXParseException e) throws SAXException {
-			System.out.println(e.getMessage());
-		}
-
-		/**
-		 * Un error
-		 *
-		 * @param e La excepción
-		 *
-		 * @throws SAXException La excepción thrown
-		 */
-		public void error(SAXParseException e) throws SAXException {
-			//System.out.println(e.getMessage());
-			error = true;
-		}
-
-		/**
-		 * Un error fatal
-		 *
-		 * @param e La excepción
-		 *
-		 * @throws SAXException La excepción thrown
-		 */
-		public void fatalError(SAXParseException e) throws SAXException {
-			//System.out.println(e.getMessage());
-			error = true;
-		}
-
-		/**
-		 * Un warning
-		 *
-		 * @param e La excepción
-		 */
-		@Override
-		public void warning(org.xml.sax.SAXParseException e) {
-			System.out.println(e.getMessage());
-		}
-
-		/**
-		 * Un error
-		 *
-		 * @param e La excepción
-		 */
-		@Override
-		public void error(org.xml.sax.SAXParseException e) {
-			//System.out.println(e.getMessage());
-			error = true;
-		}
-
-		/**
-		 * Un error fatal
-		 *
-		 * @param e La excepción
-		 */
-		@Override
-		public void fatalError(org.xml.sax.SAXParseException e) {
-			//System.out.println(e.getMessage());
-			error = true;
-		}
 	}
 }

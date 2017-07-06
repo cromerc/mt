@@ -9,65 +9,62 @@ package cl.cromer.mt;
 
 import org.w3c.dom.Document;
 
-class Maquina {
+public class Maquina {
 	private final Automata maquina;
-
 	private Estado estadoActual;
-
 	private Enlace enlaceActual;
-
 	private String cintaAnterior;
 	private int cabezal;
 
-	Maquina(Document document) {
+	public Maquina(Document document) {
 		maquina = new Automata(document);
 		reset();
 	}
 
-	Automata getMaquina() {
+	public Automata getMaquina() {
 		return maquina;
 	}
 
-	private Estado getEstadoActual() {
+	public Estado getEstadoActual() {
 		return estadoActual;
 	}
 
-	private void setEstadoActual(Estado estadoActual) {
+	public void setEstadoActual(Estado estadoActual) {
 		this.estadoActual = estadoActual;
 	}
 
-	private Enlace getEnlaceActual() {
+	public Enlace getEnlaceActual() {
 		return enlaceActual;
 	}
 
-	private void setEnlaceActual(Enlace enlaceActual) {
+	public void setEnlaceActual(Enlace enlaceActual) {
 		this.enlaceActual = enlaceActual;
 	}
 
-	private String getCintaAnterior() {
+	public String getCintaAnterior() {
 		return cintaAnterior;
 	}
 
-	private void setCintaAnterior(String cintaAnterior) {
+	public void setCintaAnterior(String cintaAnterior) {
 		this.cintaAnterior = cintaAnterior;
 	}
 
-	private int getCabezal() {
+	public int getCabezal() {
 		return cabezal;
 	}
 
-	private void setCabezal(int cabezal) {
+	public void setCabezal(int cabezal) {
 		this.cabezal = cabezal;
 	}
 
-	void reset() {
+	public void reset() {
 		setEstadoActual(maquina.getEstados().get(0));
 		setEnlaceActual(null);
 		setCintaAnterior("");
 		setCabezal(0);
 	}
 
-	boolean comprobarCadena(StringBuilder cinta, int[] estadoFinal) {
+	public boolean comprobarCadena(StringBuilder cinta, int[] estadoFinal) {
 		//estadoActual = maquina.getEstados().get(0);
 		int i;
 		for (i = 0; i < getEstadoActual().getEnlaces().size(); i++) {
@@ -106,7 +103,7 @@ class Maquina {
 		return false;
 	}
 
-	boolean comprobarCadenaS2S(StringBuilder cinta, int[] estadoFinal){
+	public boolean comprobarCadenaS2S(StringBuilder cinta, int[] estadoFinal) {
 		setCintaAnterior(cinta.toString());
 		int i;
 		for (i = 0; i < getEstadoActual().getEnlaces().size(); i++) {

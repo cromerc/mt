@@ -7,13 +7,13 @@
 
 package cl.cromer.mt;
 
-class Enlace {
+public class Enlace {
 	private char si;
 	private char sj;
 	private char movimiento;
 	private Estado qj;
 
-	Enlace(char si, Estado qj, char sj, char move) {
+	public Enlace(char si, Estado qj, char sj, char move) {
 		setMovimiento(move);
 		setSj(sj);
 		setQj(qj);
@@ -32,7 +32,7 @@ class Enlace {
 		return this.sj;
 	}
 
-	private void setSj(char sj) {
+	public void setSj(char sj) {
 		this.sj = sj;
 	}
 
@@ -40,7 +40,7 @@ class Enlace {
 		return this.movimiento;
 	}
 
-	private void setMovimiento(char movimiento) {
+	public void setMovimiento(char movimiento) {
 		this.movimiento = movimiento;
 	}
 
@@ -48,7 +48,7 @@ class Enlace {
 		return qj;
 	}
 
-	private void setQj(Estado qj) {
+	public void setQj(Estado qj) {
 		this.qj = qj;
 	}
 

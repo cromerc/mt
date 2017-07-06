@@ -14,7 +14,6 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class TablaData {
 	private final SimpleStringProperty primera;
-
 	private final SimpleStringProperty segunda;
 
 	/**

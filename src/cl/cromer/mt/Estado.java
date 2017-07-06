@@ -12,20 +12,20 @@ public class Estado {
 	private final int q;
 	private final ArrayList<Enlace> enlaces;
 
-	Estado(int q) {
+	public Estado(int q) {
 		this.q = q;
 		enlaces = new ArrayList<>();
 	}
 
-	ArrayList<Enlace> getEnlaces() {
+	public ArrayList<Enlace> getEnlaces() {
 		return enlaces;
 	}
 
-	int getQ() {
+	public int getQ() {
 		return q;
 	}
 
-	boolean createLink(char si, Estado qj, char sj, char move) {
+	public boolean createLink(char si, Estado qj, char sj, char move) {
 		if (enlaces.isEmpty()) {
 			enlaces.add(new Enlace(si, qj, sj, move));
 		}

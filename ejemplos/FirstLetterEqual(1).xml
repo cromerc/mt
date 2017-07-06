@@ -2,25 +2,25 @@
 <!DOCTYPE root SYSTEM "mtbase.dtd">
 <root>
 	<transicion>
-		<qi>0</qi>
+		<movimiento>R</movimiento>
 		<si>a</si>
 		<qj>1</qj>
+		<qi>0</qi>
 		<sj>#</sj>
-		<movimiento>R</movimiento>
 	</transicion>
 	<transicion>
 		<qi>1</qi>
 		<si>a</si>
-		<qj>1</qj>
 		<sj>#</sj>
+		<qj>1</qj>
 		<movimiento>R</movimiento>
 	</transicion>
 	<transicion>
 		<qi>1</qi>
 		<si>b</si>
+		<movimiento>R</movimiento>
 		<qj>1</qj>
 		<sj>#</sj>
-		<movimiento>R</movimiento>
 	</transicion>
 	<transicion>
 		<qi>1</qi>
@@ -98,19 +98,5 @@
 		<qj>6</qj>
 		<sj>#</sj>
 		<movimiento>R</movimiento>
-	</transicion>
-	<transicion>
-		<qi>3</qi>
-		<si>#</si>
-		<qj>7</qj>
-		<sj>#</sj>
-		<movimiento>*</movimiento>
-	</transicion>
-	<transicion>
-		<qi>6</qi>
-		<si>#</si>
-		<qj>7</qj>
-		<sj>#</sj>
-		<movimiento>*</movimiento>
 	</transicion>
 </root>

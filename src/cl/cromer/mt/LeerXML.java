@@ -8,13 +8,15 @@
 package cl.cromer.mt;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 
+import javax.print.Doc;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.*;
 
 /**
- * Esta clase puede abrir y validar un archivo de XML. Se necesita un archivo mtbase.dtd
+ * Esta clase puede abrir y validar un archivo de XML. Se necesita un archivo mtbase_.dtd
  */
 class LeerXML {
 	/**
@@ -61,7 +63,10 @@ class LeerXML {
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			documento = db.parse(archivo);
 			documento.getDocumentElement().normalize();
-			return documento;
+			if(validarEtiquetas(documento)){
+				return documento;
+			}
+			return null;
 		}
 		catch (Exception e) {
 			if (e.getMessage().contains(".dtd")) {
@@ -111,10 +116,10 @@ class LeerXML {
 			BufferedReader br = new BufferedReader(new FileReader(original));
 			BufferedWriter bw = new BufferedWriter(new FileWriter(temp));
 			if ((aux = br.readLine()).startsWith("<?xml")) {
-				bw.write(aux + "\n<!DOCTYPE root SYSTEM \"mtbase.dtd\">");
+				bw.write(aux + "\n<!DOCTYPE root SYSTEM \"mtbase_.dtd\">");
 			}
 			else {
-				bw.write("<!DOCTYPE root SYSTEM \"mtbase.dtd\">\n" + aux);
+				bw.write("<!DOCTYPE root SYSTEM \"mtbase_.dtd\">\n" + aux);
 			}
 			for (aux = ""; aux != null; aux = br.readLine()) {
 				if (!aux.startsWith("<!DOCTYPE")) {
@@ -127,5 +132,37 @@ class LeerXML {
 			return null;
 		}
 		return temp;
+	}
+
+	/**
+	 * Valida las etiquetas en el XML
+	 *
+	 * @param document XML a analizar
+	 *
+	 * @return Verdadero si esta correcto, caso contrario falso
+	 */
+	private boolean validarEtiquetas(Document document) {
+		NodeList etiquetas = document.getElementsByTagName("*");
+		for (int i = 0; i < etiquetas.getLength(); i++) {
+			switch (etiquetas.item(i).getNodeName()) {
+				case "root":
+					break;
+				case "transicion":
+					break;
+				case "qi":
+					break;
+				case "si":
+					break;
+				case "qj":
+					break;
+				case "sj":
+					break;
+				case "movimiento":
+					break;
+				default:
+					return false;
+			}
+		}
+		return true;
 	}
 }

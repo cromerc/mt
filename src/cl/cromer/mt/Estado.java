@@ -8,23 +8,50 @@ package cl.cromer.mt;
 
 import java.util.ArrayList;
 
+/**
+ * Clase que almanecerá un estado con su subindices y sus enlaces adyacentes
+ */
 public class Estado {
 	private final int q;
 	private final ArrayList<Enlace> enlaces;
 
+	/**
+	 * Contructor de la clase
+	 *
+	 * @param q Subindice del estado
+	 */
 	public Estado(int q) {
 		this.q = q;
 		enlaces = new ArrayList<>();
 	}
 
+	/**
+	 * Retorna una lista con los enlaces de un estado
+	 *
+	 * @return ArrayList de Enlaces
+	 */
 	public ArrayList<Enlace> getEnlaces() {
 		return enlaces;
 	}
 
+	/**
+	 * Retorna el subindice asociado al estado
+	 *
+	 * @return Subindice
+	 */
 	public int getQ() {
 		return q;
 	}
 
+	/**
+	 * Crea un enlace entre dos estados ó a si mismo
+	 *
+	 * @param si Simbolo a analizar en la cadena
+	 * @param qj Estado adyacente
+	 * @param sj Simbolo que escribe en la cadena
+	 * @param move Movimiento del cabezal (indice de la cadena)
+	 * @return Verdadero si se creó, falso si ya existe
+	 */
 	public boolean createLink(char si, Estado qj, char sj, char move) {
 		if (enlaces.isEmpty()) {
 			enlaces.add(new Enlace(si, qj, sj, move));
@@ -38,6 +65,11 @@ public class Estado {
 		return true;
 	}
 
+	/**
+	 * Retorna un String con la/s función/es de transición asociado a un estado
+	 *
+	 * @return String con la/s función/es
+	 */
 	@Override
 	public String toString() {
 		StringBuilder _return = new StringBuilder();

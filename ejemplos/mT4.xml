@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE root SYSTEM "mtbase.dtd">
+<!DOCTYPE root SYSTEM "mtbase_.dtd">
 <root>
 	<transicion>
 		<si>0</si>

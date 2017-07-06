@@ -1,7 +1,29 @@
-<!ELEMENT root (transicion+)>
-<!ELEMENT transicion (qi,si,qj,sj,movimiento)>
-<!ELEMENT qi (#PCDATA)>
-<!ELEMENT si (#PCDATA)>
-<!ELEMENT qj (#PCDATA)>
-<!ELEMENT sj (#PCDATA)>
-<!ELEMENT movimiento (#PCDATA)>
+<?xml encoding="UTF-8"?>
+
+        <!ELEMENT root (transicion)+>
+        <!ATTLIST root
+                xmlns CDATA #FIXED ''>
+
+        <!ELEMENT transicion (movimiento|qi|qj|si|sj)+>
+        <!ATTLIST transicion
+                xmlns CDATA #FIXED ''>
+
+        <!ELEMENT movimiento (#PCDATA)>
+        <!ATTLIST movimiento
+                xmlns CDATA #FIXED ''>
+
+        <!ELEMENT qi (#PCDATA)>
+        <!ATTLIST qi
+                xmlns CDATA #FIXED ''>
+
+        <!ELEMENT qj (#PCDATA)>
+        <!ATTLIST qj
+                xmlns CDATA #FIXED ''>
+
+        <!ELEMENT si (#PCDATA)>
+        <!ATTLIST si
+                xmlns CDATA #FIXED ''>
+
+        <!ELEMENT sj (#PCDATA)>
+        <!ATTLIST sj
+                xmlns CDATA #FIXED ''>

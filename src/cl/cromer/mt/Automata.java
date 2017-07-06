@@ -11,9 +11,20 @@ import org.w3c.dom.Document;
 
 import java.util.ArrayList;
 
+/**
+ * Clase que contiene método que guarda y ordena cada transición del archivo XML ya validado
+ */
+
 public class Automata {
 	private ArrayList<Estado> estados;
 	private ArrayList<Integer> estadosExistentes;
+
+	/**
+	 * Constructor de la clase Automata, organiza las etiquetas del XML en un array de estados
+	 * y filtra los subindices de cada estado obtenido
+	 *
+	 * @param document Document del XML
+	 */
 
 	public Automata(Document document) {
 		setEstados(new ArrayList<>());
@@ -24,27 +35,13 @@ public class Automata {
 				int qj = Integer.parseInt(document.getElementsByTagName("qj").item(i).getTextContent());
 				char si = document.getElementsByTagName("si").item(i).getTextContent().charAt(0);
 				char sj = document.getElementsByTagName("sj").item(i).getTextContent().charAt(0);
-		        /*if(estados.isEmpty() && qi != qj){
-		            estados.add(qi, new Estado(qi));
-                    estados.add(qj, new Estado(qj));
-                }
-                else if(estados.isEmpty() && qi == qj) {
-                    estados.add(qi, new Estado(qi));
-                }*/
 				if (estados.size() <= qi) {
 					estados.add(qi, new Estado(qi));
 				}
 				if (estados.size() <= qj) {
 					estados.add(qj, new Estado(qj));
 				}
-				if (!estados.get(qi).createLink(si, estados.get(qj), sj, move)) {
-					if (qi == qj) {
-						System.out.println("Recursivo");
-					}
-					else {
-						System.out.println("En" + qi + " a " + qj + "Transicion para " + si + " ya esta creada");
-					}
-				}
+				estados.get(qi).createLink(si, estados.get(qj), sj, move);
 			}
 			else {
 				System.out.println("Movimiento invalido de cinta");
@@ -59,18 +56,38 @@ public class Automata {
 		}
 	}
 
+	/**
+	 * Retorna un lista de estados
+	 *
+	 * @return ArrayList de Estados
+	 */
 	public ArrayList<Estado> getEstados() {
 		return estados;
 	}
 
+	/**
+	 * Asigna una lista de estados
+	 *
+	 * @param estados Estados ya creados
+	 */
 	public void setEstados(ArrayList<Estado> estados) {
 		this.estados = estados;
 	}
 
+	/**
+	 * Retorna una lista de números que serán los subindices de los estados existentes
+	 *
+	 * @return estadosExistentes Lista de subindices
+	 */
 	public ArrayList<Integer> getEstadosExistentes() {
 		return estadosExistentes;
 	}
 
+	/**
+	 * Asigna una lista de estados existentes
+	 *
+	 * @param estadosExistentes
+	 */
 	public void setEstadosExistentes(ArrayList<Integer> estadosExistentes) {
 		this.estadosExistentes = estadosExistentes;
 	}

@@ -1,0 +1,23 @@
+<root>
+	<transicion>
+		<qi>0</qi>
+		<si>a</si>
+		<qj>1</qj>
+		<sj>a</sj>
+		<movimiento>R</movimiento>
+	</transicion>
+	<transicion>
+		<qi>1</qi>
+		<si>b</si>
+		<qj>1</qj>
+		<sj>b</sj>
+		<movimiento>R</movimiento>
+	</transicion>
+	<transicion>
+		<qi>1</qi>
+		<si>#</si>
+		<qj>2</qj>
+		<sj>#</sj>
+		<movimiento>S</movimiento>
+	</transicion>
+</root>

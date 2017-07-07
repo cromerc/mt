@@ -49,20 +49,18 @@ public class Estado {
 	 * @param si Simbolo a analizar en la cadena
 	 * @param qj Estado adyacente
 	 * @param sj Simbolo que escribe en la cadena
-	 * @param move Movimiento del cabezal (indice de la cadena)
-	 * @return Verdadero si se creó, falso si ya existe
+	 * @param mover Movimiento del cabezal (indice de la cadena)
 	 */
-	public boolean createLink(char si, Estado qj, char sj, char move) {
+	public void crearEnlace(char si, Estado qj, char sj, char mover) {
 		if (enlaces.isEmpty()) {
-			enlaces.add(new Enlace(si, qj, sj, move));
+			enlaces.add(new Enlace(si, qj, sj, mover));
 		}
-		for (Enlace aLink : enlaces) {
-			if (aLink.getSi() == si) {
-				return false;
+		for (Enlace enlace : enlaces) {
+			if (enlace.getSi() == si) {
+				return;
 			}
 		}
-		enlaces.add(new Enlace(si, qj, sj, move));
-		return true;
+		enlaces.add(new Enlace(si, qj, sj, mover));
 	}
 
 	/**

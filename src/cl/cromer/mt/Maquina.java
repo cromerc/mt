@@ -50,7 +50,7 @@ public class Maquina {
 	/**
 	 * Asigna un estado actual que esta la maquina en un instante de tiempo
 	 *
-	 * @param estadoActual
+	 * @param estadoActual En que estado es la maquina
 	 */
 	public void setEstadoActual(Estado estadoActual) {
 		this.estadoActual = estadoActual;
@@ -68,7 +68,7 @@ public class Maquina {
 	/**
 	 * Asigna un enlace actual que esta la maquina en un instante de tiempo
 	 *
-	 * @param enlaceActual
+	 * @param enlaceActual La enlace donde esta la maquina
 	 */
 	public void setEnlaceActual(Enlace enlaceActual) {
 		this.enlaceActual = enlaceActual;
@@ -85,7 +85,7 @@ public class Maquina {
 
 	/**
 	 * Asigna la cadena anterior a que la maquina hiciera cambios
-	 * @param cintaAnterior
+	 * @param cintaAnterior La cinta a verificar
 	 */
 	public void setCintaAnterior(String cintaAnterior) {
 		this.cintaAnterior = cintaAnterior;
@@ -103,7 +103,7 @@ public class Maquina {
 	/**
 	 * Asigna el indice en que se ubica en la cadena (Cabezal)
 	 *
-	 * @param cabezal
+	 * @param cabezal Donde poner la cabezal
 	 */
 	public void setCabezal(int cabezal) {
 		this.cabezal = cabezal;
@@ -116,34 +116,31 @@ public class Maquina {
 		setEstadoActual(getMaquina().getEstados().get(0));
 		setEnlaceActual(null);
 		setCintaAnterior("");
-		setCabezal(0);
+		setCabezal(1);
 	}
 
 	/**
 	 * Comprueba que si la cadena ingresada es reconocida por la maquina
 	 *
 	 * @param cinta cadena ingresada por el usuario
-	 * @param estadoFinal Arreglo de estados finales, también ingresados por usuario
+	 * @param estadosFinales Arreglo de estados finales, también ingresados por usuario
 	 * @return Verdadero si lo reconoce, caso contrario, falso
 	 */
-	public boolean comprobarCadena(StringBuilder cinta, int[] estadoFinal) {
-		int i;
-		for (i = 0; i < getEstadoActual().getEnlaces().size(); i++) {
+	public boolean comprobarCadena(StringBuilder cinta, int[] estadosFinales) {
+		for (int i = 0; i < getEstadoActual().getEnlaces().size(); i++) {
 			if (getEstadoActual().getEnlaces().get(i).getSi() == cinta.charAt(getCabezal())) {
 				setEnlaceActual(getEstadoActual().getEnlaces().get(i));
 				cinta.setCharAt(getCabezal(), getEnlaceActual().getSj());
-				movimientoCabezal(getEnlaceActual().getMovimiento(),cinta);
+				movimientoCabezal(getEnlaceActual().getMovimiento(), cinta);
 				setEstadoActual(getEnlaceActual().getQj());
 				i = -1;
 			}
 		}
-		for (i = 0; i < estadoFinal.length; i++) {
-			if (getEstadoActual().getQ() == estadoFinal[i]) {
-				reset();
+		for (int estadoFinal : estadosFinales) {
+			if (getEstadoActual().getQ() == estadoFinal) {
 				return true;
 			}
 		}
-		reset();
 		return false;
 	}
 
@@ -153,28 +150,32 @@ public class Maquina {
 	 * un enlace actual
 	 *
 	 * @param cinta Cadena ingresada por el usuario
-	 * @param estadoFinal Arreglo de estados finales, también ingresados por usuario
-	 * @return
+	 * @param estadosFinales Arreglo de estados finales, también ingresados por usuario
+	 * @return Verdadero si reconce la cinta, sino falso
 	 */
-	public boolean comprobarCadenaS2S(StringBuilder cinta, int[] estadoFinal) {
-		setCintaAnterior(cinta.toString());
-		int i;
-		for (i = 0; i < getEstadoActual().getEnlaces().size(); i++) {
+	public int comprobarCadenaS2S(StringBuilder cinta, int[] estadosFinales) {
+		if (cintaAnterior.equals("")) {
+			setCintaAnterior(cinta.toString());
+		}
+		else {
+			cinta = new StringBuilder(getCintaAnterior());
+		}
+		for (int i = 0; i < getEstadoActual().getEnlaces().size(); i++) {
 			if (getEstadoActual().getEnlaces().get(i).getSi() == cinta.charAt(getCabezal())) {
 				setEnlaceActual(getEstadoActual().getEnlaces().get(i));
-				setEstadoActual(getEnlaceActual().getQj());
 				cinta.setCharAt(getCabezal(), getEnlaceActual().getSj());
-				movimientoCabezal(getEnlaceActual().getMovimiento(),cinta);
-				return true;
+				movimientoCabezal(getEnlaceActual().getMovimiento(), cinta);
+				setEstadoActual(getEnlaceActual().getQj());
+				setCintaAnterior(cinta.toString());
+				return 0;
 			}
 		}
-		for (i = 0; i < estadoFinal.length; i++) {
-			if (getEstadoActual().getQ() == estadoFinal[i]) {
-				setEnlaceActual(null);  // Indicar que no hay más transiciones
-				return true;
+		for (int estadoFinal : estadosFinales) {
+			if (getEstadoActual().getQ() == estadoFinal) {
+				return 1;
 			}
 		}
-		return false;
+		return -1;
 	}
 
 	/**
@@ -182,25 +183,24 @@ public class Maquina {
 	 * @param mov caracter asociado al movimiento
 	 * @param cinta Cadena ingresada por el usuario
 	 */
-	private void movimientoCabezal(char mov,StringBuilder cinta) {
-	switch (mov) {
-		case 'L': {
-			setCabezal(getCabezal() - 1);
-			if (getCabezal() == (-1)) {
-				cinta.insert(0, "#");
+	private void movimientoCabezal(char mov, StringBuilder cinta) {
+		switch (mov) {
+			case 'L': {
+				setCabezal(getCabezal() - 1);
+				if (getCabezal() == (-1)) {
+					cinta.insert(0, "#");
+					setCabezal(getCabezal() + 1);
+				}
+				break;
+			}
+			case 'R': {
 				setCabezal(getCabezal() + 1);
+				if (getCabezal() == cinta.length()) {
+					cinta.insert(getCabezal(), "#");
+				}
+				break;
 			}
-			break;
+			default: {/*Se mantiene*/}
 		}
-		case 'R': {
-			setCabezal(getCabezal() + 1);
-			if (getCabezal() == cinta.length()) {
-				cinta.insert(getCabezal(), "#");
-			}
-			break;
-		}
-		default: {/*Se mantiene*/}
 	}
 }
-}
-

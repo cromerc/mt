@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact type="javafx" name="MaquinaTuring">
-    <output-path>$PROJECT_DIR$/out/artifacts/MaquinaTuring</output-path>
+  <artifact type="javafx" name="MT">
+    <output-path>$PROJECT_DIR$/out/artifacts/MT</output-path>
     <properties id="javafx-properties">
       <options>
         <option name="appClass" value="cl.cromer.mt.MT" />
@@ -15,7 +15,7 @@
           </JavaFxApplicationIcons>
         </option>
         <option name="nativeBundle" value="all" />
-        <option name="title" value="Maquina Turning" />
+        <option name="title" value="MT" />
         <option name="vendor" value="" />
         <option name="version" value="" />
         <option name="width" value="640" />
@@ -23,7 +23,7 @@
     </properties>
     <root id="root">
       <element id="archive" name="MT.jar">
-        <element id="module-output" name="Fundamentos" />
+        <element id="module-output" name="MT" />
       </element>
     </root>
   </artifact>

@@ -9,14 +9,16 @@ package cl.cromer.mt;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
+import org.xml.sax.ErrorHandler;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
-import javax.print.Doc;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.*;
 
 /**
- * Esta clase puede abrir y validar un archivo de XML. Se necesita un archivo mtbase_.dtd
+ * Esta clase puede abrir y validar un archivo de XML. Se necesita un archivo mtbase.dtd
  */
 class LeerXML {
 	/**
@@ -61,6 +63,7 @@ class LeerXML {
 			dbf.setNamespaceAware(true);
 
 			DocumentBuilder db = dbf.newDocumentBuilder();
+			db.setErrorHandler(new CustomErrorHandler());
 			documento = db.parse(archivo);
 			documento.getDocumentElement().normalize();
 			if(validarEtiquetas(documento)){
@@ -116,10 +119,10 @@ class LeerXML {
 			BufferedReader br = new BufferedReader(new FileReader(original));
 			BufferedWriter bw = new BufferedWriter(new FileWriter(temp));
 			if ((aux = br.readLine()).startsWith("<?xml")) {
-				bw.write(aux + "\n<!DOCTYPE root SYSTEM \"mtbase_.dtd\">");
+				bw.write(aux + "\n<!DOCTYPE root SYSTEM \"mtbase.dtd\">");
 			}
 			else {
-				bw.write("<!DOCTYPE root SYSTEM \"mtbase_.dtd\">\n" + aux);
+				bw.write("<!DOCTYPE root SYSTEM \"mtbase.dtd\">\n" + aux);
 			}
 			for (aux = ""; aux != null; aux = br.readLine()) {
 				if (!aux.startsWith("<!DOCTYPE")) {
@@ -135,11 +138,11 @@ class LeerXML {
 	}
 
 	/**
-	 * Valida las etiquetas en el XML
+	 * Validar las etiquetas en el XML
 	 *
 	 * @param document XML a analizar
 	 *
-	 * @return Verdadero si esta correcto, caso contrario falso
+	 * @return Verdadero si está correcto, caso contrario falso
 	 */
 	private boolean validarEtiquetas(Document document) {
 		NodeList etiquetas = document.getElementsByTagName("*");
@@ -164,5 +167,48 @@ class LeerXML {
 			}
 		}
 		return true;
+	}
+
+	/**
+	 * Esta clase es para manejar problemas en los archivo .xml
+	 */
+	public class CustomErrorHandler implements ErrorHandler {
+		/**
+		 * Errores fatales, el archivo es invalido.
+		 *
+		 * @param exception La excepción
+		 *
+		 * @throws SAXException La SAX excepción
+		 */
+		@Override
+		public void warning(SAXParseException exception) throws SAXException {
+			//System.out.println("Warning: " + exception);
+			// No es fatal, sigue
+		}
+
+		/**
+		 * Errores fatales, el archivo es invalido.
+		 *
+		 * @param exception La excepción
+		 *
+		 * @throws SAXException La SAX excepción
+		 */
+		@Override
+		public void error(SAXParseException exception) throws SAXException {
+			//System.out.println("Error: " + exception);
+			// No es fatal, sigue
+		}
+
+		/**
+		 * Errores fatales, el archivo es invalido.
+		 *
+		 * @param exception La excepción
+		 *
+		 * @throws SAXException La SAX excepción
+		 */
+		@Override
+		public void fatalError(SAXParseException exception) throws SAXException {
+			System.err.println("Fatal error: " + exception);
+		}
 	}
 }

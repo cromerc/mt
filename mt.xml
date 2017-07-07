@@ -1,262 +1,262 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="fundamentos" default="all">
+<project name="mt" default="all">
 
 
-	<property file="mt.properties"/>
-	<!-- Uncomment the following property if no tests compilation is needed -->
-	<!--
-	<property name="skip.tests" value="true"/>
-	 -->
+  <property file="mt.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!--
+  <property name="skip.tests" value="true"/>
+   -->
 
-	<!-- Compiler options -->
+  <!-- Compiler options -->
 
-	<property name="compiler.debug" value="on"/>
-	<property name="compiler.generate.no.warnings" value="off"/>
-	<property name="compiler.args" value=""/>
-	<property name="compiler.max.memory" value="700m"/>
-	<patternset id="ignored.files">
-		<exclude name="**/*.hprof/**"/>
-		<exclude name="**/*.pyc/**"/>
-		<exclude name="**/*.pyo/**"/>
-		<exclude name="**/*.rbc/**"/>
-		<exclude name="**/*.yarb/**"/>
-		<exclude name="**/*~/**"/>
-		<exclude name="**/.DS_Store/**"/>
-		<exclude name="**/.git/**"/>
-		<exclude name="**/.hg/**"/>
-		<exclude name="**/.svn/**"/>
-		<exclude name="**/CVS/**"/>
-		<exclude name="**/__pycache__/**"/>
-		<exclude name="**/_svn/**"/>
-		<exclude name="**/vssver.scc/**"/>
-		<exclude name="**/vssver2.scc/**"/>
-	</patternset>
-	<patternset id="library.patterns">
-		<include name="*.war"/>
-		<include name="*.swc"/>
-		<include name="*.apk"/>
-		<include name="*.zip"/>
-		<include name="*.egg"/>
-		<include name="*.ane"/>
-		<include name="*.jar"/>
-		<include name="*.ear"/>
-	</patternset>
-	<patternset id="compiler.resources">
-		<exclude name="**/?*.java"/>
-		<exclude name="**/?*.form"/>
-		<exclude name="**/?*.class"/>
-		<exclude name="**/?*.groovy"/>
-		<exclude name="**/?*.scala"/>
-		<exclude name="**/?*.flex"/>
-		<exclude name="**/?*.kt"/>
-		<exclude name="**/?*.clj"/>
-	</patternset>
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="700m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/*.rbc/**"/>
+    <exclude name="**/*.yarb/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/vssver.scc/**"/>
+    <exclude name="**/vssver2.scc/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.war"/>
+    <include name="*.swc"/>
+    <include name="*.apk"/>
+    <include name="*.zip"/>
+    <include name="*.egg"/>
+    <include name="*.ane"/>
+    <include name="*.jar"/>
+    <include name="*.ear"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <exclude name="**/?*.java"/>
+    <exclude name="**/?*.form"/>
+    <exclude name="**/?*.class"/>
+    <exclude name="**/?*.groovy"/>
+    <exclude name="**/?*.scala"/>
+    <exclude name="**/?*.flex"/>
+    <exclude name="**/?*.kt"/>
+    <exclude name="**/?*.clj"/>
+  </patternset>
 
-	<!-- JDK definitions -->
+  <!-- JDK definitions -->
 
-	<property name="jdk.bin.1.8" value="${jdk.home.1.8}/bin"/>
-	<path id="jdk.classpath.1.8">
-		<fileset dir="${jdk.home.1.8}">
-			<include name="jre/lib/charsets.jar"/>
-			<include name="jre/lib/deploy.jar"/>
-			<include name="jre/lib/ext/cldrdata.jar"/>
-			<include name="jre/lib/ext/dnsns.jar"/>
-			<include name="jre/lib/ext/jaccess.jar"/>
-			<include name="jre/lib/ext/jfxrt.jar"/>
-			<include name="jre/lib/ext/localedata.jar"/>
-			<include name="jre/lib/ext/nashorn.jar"/>
-			<include name="jre/lib/ext/sunec.jar"/>
-			<include name="jre/lib/ext/sunjce_provider.jar"/>
-			<include name="jre/lib/ext/sunpkcs11.jar"/>
-			<include name="jre/lib/ext/zipfs.jar"/>
-			<include name="jre/lib/javaws.jar"/>
-			<include name="jre/lib/jce.jar"/>
-			<include name="jre/lib/jfr.jar"/>
-			<include name="jre/lib/jfxswt.jar"/>
-			<include name="jre/lib/jsse.jar"/>
-			<include name="jre/lib/management-agent.jar"/>
-			<include name="jre/lib/plugin.jar"/>
-			<include name="jre/lib/resources.jar"/>
-			<include name="jre/lib/rt.jar"/>
-		</fileset>
-	</path>
+  <property name="jdk.bin.1.8" value="${jdk.home.1.8}/bin"/>
+  <path id="jdk.classpath.1.8">
+    <fileset dir="${jdk.home.1.8}">
+      <include name="jre/lib/charsets.jar"/>
+      <include name="jre/lib/deploy.jar"/>
+      <include name="jre/lib/ext/cldrdata.jar"/>
+      <include name="jre/lib/ext/dnsns.jar"/>
+      <include name="jre/lib/ext/jaccess.jar"/>
+      <include name="jre/lib/ext/jfxrt.jar"/>
+      <include name="jre/lib/ext/localedata.jar"/>
+      <include name="jre/lib/ext/nashorn.jar"/>
+      <include name="jre/lib/ext/sunec.jar"/>
+      <include name="jre/lib/ext/sunjce_provider.jar"/>
+      <include name="jre/lib/ext/sunpkcs11.jar"/>
+      <include name="jre/lib/ext/zipfs.jar"/>
+      <include name="jre/lib/javaws.jar"/>
+      <include name="jre/lib/jce.jar"/>
+      <include name="jre/lib/jfr.jar"/>
+      <include name="jre/lib/jfxswt.jar"/>
+      <include name="jre/lib/jsse.jar"/>
+      <include name="jre/lib/management-agent.jar"/>
+      <include name="jre/lib/plugin.jar"/>
+      <include name="jre/lib/resources.jar"/>
+      <include name="jre/lib/rt.jar"/>
+    </fileset>
+  </path>
 
-	<property name="project.jdk.home" value="${jdk.home.1.8}"/>
-	<property name="project.jdk.bin" value="${jdk.bin.1.8}"/>
-	<property name="project.jdk.classpath" value="jdk.classpath.1.8"/>
-	<!-- Register Custom Compiler Taskdefs -->
-	<property name="javac2.home" value="${idea.home}/lib"/>
-	<path id="javac2.classpath">
-		<pathelement location="${javac2.home}/javac2.jar"/>
-		<pathelement location="${javac2.home}/jdom.jar"/>
-		<pathelement location="${javac2.home}/asm-all.jar"/>
-		<pathelement location="${javac2.home}/jgoodies-forms.jar"/>
-	</path>
-	<target name="register.custom.compilers">
-		<taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
-		<taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>
-	</target>
+  <property name="project.jdk.home" value="${jdk.home.1.8}"/>
+  <property name="project.jdk.bin" value="${jdk.bin.1.8}"/>
+  <property name="project.jdk.classpath" value="jdk.classpath.1.8"/>
+  <!-- Register Custom Compiler Taskdefs -->
+  <property name="javac2.home" value="${idea.home}/lib"/>
+  <path id="javac2.classpath">
+    <pathelement location="${javac2.home}/javac2.jar"/>
+    <pathelement location="${javac2.home}/jdom.jar"/>
+    <pathelement location="${javac2.home}/asm-all.jar"/>
+    <pathelement location="${javac2.home}/jgoodies-forms.jar"/>
+  </path>
+  <target name="register.custom.compilers">
+    <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
+    <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>
+  </target>
 
-	<!-- Modules -->
-
-
-	<!-- Module Fundamentos -->
-
-	<dirname property="module.fundamentos.basedir" file="${ant.file}"/>
+  <!-- Modules -->
 
 
-	<property name="module.jdk.home.fundamentos" value="${jdk.home.1.8}"/>
-	<property name="module.jdk.bin.fundamentos" value="${jdk.bin.1.8}"/>
-	<property name="module.jdk.classpath.fundamentos" value="jdk.classpath.1.8"/>
+  <!-- Module MT -->
 
-	<property name="compiler.args.fundamentos" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
-
-	<property name="fundamentos.output.dir" value="${module.fundamentos.basedir}/out/production/Fundamentos"/>
-	<property name="fundamentos.testoutput.dir" value="${module.fundamentos.basedir}/out/test/Fundamentos"/>
-
-	<path id="fundamentos.module.bootclasspath">
-		<!-- Paths to be included in compilation bootclasspath -->
-	</path>
-
-	<path id="fundamentos.module.production.classpath">
-		<path refid="${module.jdk.classpath.fundamentos}"/>
-	</path>
-
-	<path id="fundamentos.runtime.production.module.classpath">
-		<pathelement location="${fundamentos.output.dir}"/>
-	</path>
-
-	<path id="fundamentos.module.classpath">
-		<path refid="${module.jdk.classpath.fundamentos}"/>
-		<pathelement location="${fundamentos.output.dir}"/>
-	</path>
-
-	<path id="fundamentos.runtime.module.classpath">
-		<pathelement location="${fundamentos.testoutput.dir}"/>
-		<pathelement location="${fundamentos.output.dir}"/>
-	</path>
+  <dirname property="module.mt.basedir" file="${ant.file}"/>
 
 
-	<patternset id="excluded.from.module.fundamentos">
-		<patternset refid="ignored.files"/>
-	</patternset>
+  <property name="module.jdk.home.mt" value="${jdk.home.1.8}"/>
+  <property name="module.jdk.bin.mt" value="${jdk.bin.1.8}"/>
+  <property name="module.jdk.classpath.mt" value="jdk.classpath.1.8"/>
 
-	<patternset id="excluded.from.compilation.fundamentos">
-		<patternset refid="excluded.from.module.fundamentos"/>
-	</patternset>
+  <property name="compiler.args.mt" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
 
-	<path id="fundamentos.module.sourcepath">
-		<dirset dir="${module.fundamentos.basedir}">
-			<include name="src"/>
-		</dirset>
-	</path>
+  <property name="mt.output.dir" value="${module.mt.basedir}/out/production/MT"/>
+  <property name="mt.testoutput.dir" value="${module.mt.basedir}/out/test/MT"/>
+
+  <path id="mt.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+
+  <path id="mt.module.production.classpath">
+    <path refid="${module.jdk.classpath.mt}"/>
+  </path>
+
+  <path id="mt.runtime.production.module.classpath">
+    <pathelement location="${mt.output.dir}"/>
+  </path>
+
+  <path id="mt.module.classpath">
+    <path refid="${module.jdk.classpath.mt}"/>
+    <pathelement location="${mt.output.dir}"/>
+  </path>
+
+  <path id="mt.runtime.module.classpath">
+    <pathelement location="${mt.testoutput.dir}"/>
+    <pathelement location="${mt.output.dir}"/>
+  </path>
 
 
-	<target name="compile.module.fundamentos" depends="compile.module.fundamentos.production,compile.module.fundamentos.tests" description="Compile module Fundamentos"/>
+  <patternset id="excluded.from.module.mt">
+    <patternset refid="ignored.files"/>
+  </patternset>
 
-	<target name="compile.module.fundamentos.production" depends="register.custom.compilers" description="Compile module Fundamentos; production classes">
-		<mkdir dir="${fundamentos.output.dir}"/>
-		<javac2 destdir="${fundamentos.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.fundamentos}/javac">
-			<compilerarg line="${compiler.args.fundamentos}"/>
-			<bootclasspath refid="fundamentos.module.bootclasspath"/>
-			<classpath refid="fundamentos.module.production.classpath"/>
-			<src refid="fundamentos.module.sourcepath"/>
-			<patternset refid="excluded.from.compilation.fundamentos"/>
-		</javac2>
+  <patternset id="excluded.from.compilation.mt">
+    <patternset refid="excluded.from.module.mt"/>
+  </patternset>
 
-		<copy todir="${fundamentos.output.dir}">
-			<fileset dir="${module.fundamentos.basedir}/src">
-				<patternset refid="compiler.resources"/>
-				<type type="file"/>
-			</fileset>
-		</copy>
-	</target>
+  <path id="mt.module.sourcepath">
+    <dirset dir="${module.mt.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
 
-	<target name="compile.module.fundamentos.tests" depends="register.custom.compilers,compile.module.fundamentos.production" description="compile module Fundamentos; test classes" unless="skip.tests"/>
 
-	<target name="clean.module.fundamentos" description="cleanup module">
-		<delete dir="${fundamentos.output.dir}"/>
-		<delete dir="${fundamentos.testoutput.dir}"/>
-	</target>
+  <target name="compile.module.mt" depends="compile.module.mt.production,compile.module.mt.tests" description="Compile module MT"/>
 
-	<target name="init" description="Build initialization">
-		<!-- Perform any build initialization in this target -->
-	</target>
+  <target name="compile.module.mt.production" depends="register.custom.compilers" description="Compile module MT; production classes">
+    <mkdir dir="${mt.output.dir}"/>
+    <javac2 destdir="${mt.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.mt}/javac">
+      <compilerarg line="${compiler.args.mt}"/>
+      <bootclasspath refid="mt.module.bootclasspath"/>
+      <classpath refid="mt.module.production.classpath"/>
+      <src refid="mt.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.mt"/>
+    </javac2>
 
-	<target name="clean" depends="clean.module.fundamentos, clean.artifact.maquinaturing" description="cleanup all"/>
+    <copy todir="${mt.output.dir}">
+      <fileset dir="${module.mt.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
 
-	<target name="build.modules" depends="init, clean, compile.module.fundamentos" description="build all modules"/>
+  <target name="compile.module.mt.tests" depends="register.custom.compilers,compile.module.mt.production" description="compile module MT; test classes" unless="skip.tests"/>
 
-	<target name="init.artifacts">
-		<property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
-		<property name="artifact.output.maquinaturing" value="${basedir}/out/artifacts/MaquinaTuring"/>
-		<mkdir dir="${artifacts.temp.dir}"/>
-		<property name="artifact.temp.output.MT" value="${artifacts.temp.dir}/MT.jar"/>
-		<taskdef resource="com/sun/javafx/tools/ant/antlib.xml" uri="javafx:com.sun.javafx.tools.ant" classpath="${jdk.home.1.8}/lib/ant-javafx.jar"/>
-	</target>
+  <target name="clean.module.mt" description="cleanup module">
+    <delete dir="${mt.output.dir}"/>
+    <delete dir="${mt.testoutput.dir}"/>
+  </target>
 
-	<target name="clean.artifact.maquinaturing" description="clean MaquinaTuring artifact output">
-		<delete dir="${artifact.output.maquinaturing}"/>
-	</target>
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
 
-	<target xmlns:fx="javafx:com.sun.javafx.tools.ant" name="artifact.maquinaturing" depends="init.artifacts, compile.module.fundamentos" description="Build &#39;MaquinaTuring&#39; artifact">
-		<mkdir dir="${artifact.output.maquinaturing}"/>
-		<copy todir="${artifact.temp.output.MT}">
-			<fileset dir="${fundamentos.output.dir}"/>
-		</copy>
-		<fx:fileset id="all_but_MT" dir="${artifact.temp.output.MT}" includes="**/*.jar">
-			<exclude name="MT.jar"/>
-		</fx:fileset>
-		<fx:fileset id="all_MT" dir="${artifact.temp.output.MT}" includes="**/*.jar"/>
-		<fx:application id="MT_id" name="MaquinaTuring" mainClass="cl.cromer.mt.MT"/>
-		<fx:jar destfile="${artifact.temp.output.MT}/MT.jar">
-			<fx:application refid="MT_id"/>
-			<fileset dir="${artifact.temp.output.MT}" excludes="**/*.jar"/>
-			<fx:resources>
-				<fx:fileset refid="all_but_MT"/>
-			</fx:resources>
-			<manifest>
-				<attribute name="Implementation-Title" value="Maquina Turning"/>
-				<attribute name="Implementation-Version" value=""/>
-				<attribute name="Implementation-Vendor" value=""/>
-			</manifest>
-		</fx:jar>
-		<condition property="app.icon.path" value="${basedir}/src/cl/cromer/mt/images/icon.png">
-			<and>
-				<os family="unix"/>
-				<not>
-					<os family="mac"/>
-				</not>
-			</and>
-		</condition>
-		<condition property="app.icon.path" value="${basedir}/src/cl/cromer/mt/images/icon.icns">
-			<os family="mac"/>
-		</condition>
-		<condition property="app.icon.path" value="${basedir}/src/cl/cromer/mt/images/icon.ico">
-			<os family="windows"/>
-		</condition>
-		<fx:deploy width="640" height="480" updatemode="background" outdir="${artifact.temp.output.MT}/deploy" outfile="MT" nativeBundles="all">
-			<fx:application refid="MT_id"/>
-			<fx:info title="Maquina Turning">
-				<fx:icon href="${app.icon.path}"/>
-			</fx:info>
-			<fx:resources>
-				<fx:fileset refid="all_MT"/>
-			</fx:resources>
-		</fx:deploy>
-		<copy todir="${artifact.output.maquinaturing}">
-			<fileset dir="${artifact.temp.output.MT}/deploy"/>
-		</copy>
-		<delete includeemptydirs="true">
-			<fileset dir="${artifact.temp.output.MT}"/>
-		</delete>
-	</target>
+  <target name="clean" depends="clean.module.mt, clean.artifact.mt" description="cleanup all"/>
 
-	<target name="build.all.artifacts" depends="artifact.maquinaturing" description="Build all artifacts">
+  <target name="build.modules" depends="init, clean, compile.module.mt" description="build all modules"/>
 
-		<!-- Delete temporary files -->
-		<delete dir="${artifacts.temp.dir}"/>
-	</target>
+  <target name="init.artifacts">
+    <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
+    <property name="artifact.output.mt" value="${basedir}/out/artifacts/MT"/>
+    <mkdir dir="${artifacts.temp.dir}"/>
+    <property name="artifact.temp.output.MT" value="${artifacts.temp.dir}/MT.jar"/>
+    <taskdef resource="com/sun/javafx/tools/ant/antlib.xml" uri="javafx:com.sun.javafx.tools.ant" classpath="${jdk.home.1.8}/lib/ant-javafx.jar"/>
+  </target>
 
-	<target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
+  <target name="clean.artifact.mt" depends="init.artifacts" description="clean MT artifact output">
+    <delete dir="${artifact.output.mt}"/>
+  </target>
+
+  <target xmlns:fx="javafx:com.sun.javafx.tools.ant" name="artifact.mt" depends="init.artifacts, compile.module.mt" description="Build &#39;MT&#39; artifact">
+    <mkdir dir="${artifact.output.mt}"/>
+    <copy todir="${artifact.temp.output.MT}">
+      <fileset dir="${mt.output.dir}"/>
+    </copy>
+    <fx:fileset id="all_but_MT" dir="${artifact.temp.output.MT}" includes="**/*.jar">
+      <exclude name="MT.jar"/>
+    </fx:fileset>
+    <fx:fileset id="all_MT" dir="${artifact.temp.output.MT}" includes="**/*.jar"/>
+    <fx:application id="MT_id" name="MT" mainClass="cl.cromer.mt.MT"/>
+    <fx:jar destfile="${artifact.temp.output.MT}/MT.jar">
+      <fx:application refid="MT_id"/>
+      <fileset dir="${artifact.temp.output.MT}" excludes="**/*.jar"/>
+      <fx:resources>
+        <fx:fileset refid="all_but_MT"/>
+      </fx:resources>
+      <manifest>
+        <attribute name="Implementation-Title" value="MT"/>
+        <attribute name="Implementation-Version" value=""/>
+        <attribute name="Implementation-Vendor" value=""/>
+      </manifest>
+    </fx:jar>
+    <condition property="app.icon.path" value="${basedir}/src/cl/cromer/mt/images/icon.png">
+      <and>
+        <os family="unix"/>
+        <not>
+          <os family="mac"/>
+        </not>
+      </and>
+    </condition>
+    <condition property="app.icon.path" value="${basedir}/src/cl/cromer/mt/images/icon.icns">
+      <os family="mac"/>
+    </condition>
+    <condition property="app.icon.path" value="${basedir}/src/cl/cromer/mt/images/icon.ico">
+      <os family="windows"/>
+    </condition>
+    <fx:deploy width="640" height="480" updatemode="background" outdir="${artifact.temp.output.MT}/deploy" outfile="MT" nativeBundles="all">
+      <fx:application refid="MT_id"/>
+      <fx:info title="MT">
+        <fx:icon href="${app.icon.path}"/>
+      </fx:info>
+      <fx:resources>
+        <fx:fileset refid="all_MT"/>
+      </fx:resources>
+    </fx:deploy>
+    <copy todir="${artifact.output.mt}">
+      <fileset dir="${artifact.temp.output.MT}/deploy"/>
+    </copy>
+    <delete includeemptydirs="true">
+      <fileset dir="${artifact.temp.output.MT}"/>
+    </delete>
+  </target>
+
+  <target name="build.all.artifacts" depends="artifact.mt" description="Build all artifacts">
+
+    <!-- Delete temporary files -->
+    <delete dir="${artifacts.temp.dir}"/>
+  </target>
+
+  <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
 </project>

@@ -1,7 +1,0 @@
-<!ELEMENT root (transicion+)>
-        <!ELEMENT transicion (qi|si|qj|sj|movimiento)>
-<!ELEMENT qi (#PCDATA)>
-<!ELEMENT si (#PCDATA)>
-<!ELEMENT qj (#PCDATA)>
-<!ELEMENT sj (#PCDATA)>
-<!ELEMENT movimiento (#PCDATA)>

@@ -12,9 +12,8 @@ import org.w3c.dom.Document;
 import java.util.ArrayList;
 
 /**
- * Clase que contiene método que guarda y ordena cada transición del archivo XML ya validado
+ * Clase que contiene métodos que guarda y ordena cada transición del archivo XML ya validado
  */
-
 public class Automata {
 	private ArrayList<Estado> estados;
 	private ArrayList<Integer> estadosExistentes;
@@ -25,30 +24,28 @@ public class Automata {
 	 *
 	 * @param document Document del XML
 	 */
-
 	public Automata(Document document) {
 		setEstados(new ArrayList<>());
 		for (int i = 0; i < document.getElementsByTagName("transicion").getLength(); i++) {
-			char move = document.getElementsByTagName("movimiento").item(i).getTextContent().charAt(0);
-			if (move == 'E' || move == 'R' || move == 'L' || move == '*') {
+			char mover = document.getElementsByTagName("movimiento").item(i).getTextContent().charAt(0);
+			if (mover == 'E' || mover == 'R' || mover == 'L' || mover == '*' || mover == 'S') {
 				int qi = Integer.parseInt(document.getElementsByTagName("qi").item(i).getTextContent());
 				int qj = Integer.parseInt(document.getElementsByTagName("qj").item(i).getTextContent());
 				char si = document.getElementsByTagName("si").item(i).getTextContent().charAt(0);
 				char sj = document.getElementsByTagName("sj").item(i).getTextContent().charAt(0);
-				if (estados.size() <= qi) {
-					estados.add(qi, new Estado(qi));
+				if (getEstados().size() <= qi) {
+					getEstados().add(qi, new Estado(qi));
 				}
-				if (estados.size() <= qj) {
-					estados.add(qj, new Estado(qj));
+				if (getEstados().size() <= qj) {
+					getEstados().add(qj, new Estado(qj));
 				}
-				estados.get(qi).createLink(si, estados.get(qj), sj, move);
+				getEstados().get(qi).crearEnlace(si, getEstados().get(qj), sj, mover);
 			}
 			else {
 				System.out.println("Movimiento invalido de cinta");
-				System.exit(1);
 			}
 		}
-		estadosExistentes = new ArrayList<>();
+		setEstadosExistentes(new ArrayList<>());
 		for (int i = 0; i < getEstados().size(); i++) {
 			if (getEstados().get(i) != null) {
 				getEstadosExistentes().add(getEstados().get(i).getQ());
@@ -86,7 +83,7 @@ public class Automata {
 	/**
 	 * Asigna una lista de estados existentes
 	 *
-	 * @param estadosExistentes
+	 * @param estadosExistentes Los estados a guardar
 	 */
 	public void setEstadosExistentes(ArrayList<Integer> estadosExistentes) {
 		this.estadosExistentes = estadosExistentes;

@@ -36,18 +36,14 @@ import java.util.regex.Pattern;
  * Controlar las acciones cuando una opción es elegido en el menu.
  */
 public class MenuController {
-	private EstadosFinales estadosFinales;
-
-	private TableView<TablaData> tableView;
-
 	@FXML
 	private MenuBar menuBar;
-
 	@FXML
 	private MenuItem menuIndiv;
-
 	@FXML
 	private MenuItem menuLote;
+
+	private EstadosFinales estadosFinales;
 
 	/**
 	 * Menu opción cargar transiciones
@@ -61,7 +57,6 @@ public class MenuController {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Abrir archivo XML");
 		fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivos XML (*.xml)", "*.xml"));
-		//fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("Archivos XML (*.xml)", "*.xml"));
 		File archivo = fileChooser.showOpenDialog(parentStage);
 		LeerXML xml = new LeerXML();
 		Document documento = xml.leerArchivo(archivo);
@@ -77,12 +72,13 @@ public class MenuController {
 				Text text = new Text(0, 0, "TRANSICIONES CARGADAS");
 				text.setFill(Color.BLACK);
 				text.setFont(Font.font(java.awt.Font.SANS_SERIF, 25));
+				text.setId("cargada");
 				contenido.getChildren().add(text);
 
 				menuIndiv.setDisable(false);
 				menuLote.setDisable(false);
 			}
-			tableView = FXMLLoader.load(getClass().getResource("/cl/cromer/mt/fxml/tabla.fxml"));
+			TableView<TablaData> tableView = FXMLLoader.load(getClass().getResource("/cl/cromer/mt/fxml/tabla.fxml"));
 			VBox.setVgrow(tableView, Priority.ALWAYS);
 			tableView.skinProperty().addListener((source, oldWidth, newWidth) -> {
 				final TableHeaderRow header = (TableHeaderRow) tableView.lookup("TableHeaderRow");
@@ -128,22 +124,48 @@ public class MenuController {
 			stage.show();
 		}
 		else {
+			TableView tableView = (TableView) scene.lookup("#tableView");
+			VBox contenido = (VBox) scene.lookup("#contenido");
 			if (tableView != null) {
-				tableView.setItems(null);
+				Text cargada = (Text) scene.lookup("#cargada");
+				contenido.getChildren().removeAll(tableView, cargada);
 			}
 			menuIndiv.setDisable(true);
 			menuLote.setDisable(true);
-			if(archivo != null) MT.mostrarMensaje("Error","El archivo "+ archivo.getName()+ " no es un xml valido");
-			else MT.mostrarMensaje("Aviso","No se ha seleccionado archivo");
+			if (archivo != null) {
+				MT.mostrarMensaje("Error", "El archivo " + archivo.getName() + " no es un xml valido");
+			}
+			else {
+				MT.mostrarMensaje("Aviso", "No se ha seleccionado archivo!");
+			}
 		}
 	}
 
 	/**
 	 * Menu opción reconocimiento individual
+	 *
+	 * @throws Exception La excepción
 	 */
 	@FXML
-	protected void reconoceIndividual() {
+	@SuppressWarnings("unchecked")
+	protected void reconoceIndividual() throws Exception {
+		Scene parentScene = menuBar.getScene();
+		Stage parentStage = (Stage) parentScene.getWindow();
 
+		FXMLLoader fxmlLoader = new FXMLLoader();
+		fxmlLoader.setLocation(getClass().getResource("/cl/cromer/mt/fxml/individual.fxml"));
+		Scene scene = new Scene(fxmlLoader.load(), 640, 480);
+		scene.setUserData(estadosFinales);
+		scene.getStylesheets().add("/cl/cromer/mt/css/mt.css");
+		Stage stage = new Stage();
+		stage.initModality(Modality.WINDOW_MODAL);
+		stage.initOwner(parentStage);
+		stage.setTitle("Reconocimiento individual");
+		stage.setMinHeight(480);
+		stage.setMinWidth(640);
+		stage.setScene(scene);
+		stage.getIcons().add(new Image(getClass().getResourceAsStream("/cl/cromer/mt/images/icon.png")));
+		stage.show();
 	}
 
 	/**
@@ -165,7 +187,7 @@ public class MenuController {
 		Stage stage = new Stage();
 		stage.initModality(Modality.WINDOW_MODAL);
 		stage.initOwner(parentStage);
-		stage.setTitle("Reconocimiento por lotes");
+		stage.setTitle("Reconocimiento por lote");
 		stage.setMinHeight(480);
 		stage.setMinWidth(640);
 		stage.setScene(scene);
@@ -180,11 +202,13 @@ public class MenuController {
 		});
 		tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
+		tableView.setEditable(true);
 		TableColumn<TablaData, String> columna1 = (TableColumn<TablaData, String>) tableView.getColumns().get(0);
 		columna1.setCellFactory(TextFieldTableCell.forTableColumn());
-		columna1.setOnEditCommit(
-				columna -> columna.getTableView().getItems().get(columna.getTablePosition().getRow()).setPrimera(columna.getNewValue())
-		);
+		columna1.setOnEditCommit(event -> {
+			event.getTableView().getItems().get(event.getTablePosition().getRow()).setPrimera(agregarGatos(event.getNewValue()));
+			event.getTableView().refresh();
+		});
 
 		tableView.getColumns().get(0).setText("Cadena");
 		tableView.getColumns().get(0).setEditable(true);
@@ -193,5 +217,23 @@ public class MenuController {
 
 		VBox contenido = (VBox) scene.lookup("#contenido");
 		contenido.getChildren().add(tableView);
+	}
+
+	/**
+	 * Agregar un gato al inicio y al final de un string si no existen
+	 *
+	 * @param string El string a agregar los gatos
+	 *
+	 * @return String con gatos
+	 */
+	private String agregarGatos(String string) {
+		StringBuilder temp = new StringBuilder(string);
+		if (string.charAt(0) != '#') {
+			temp.insert(0, "#");
+		}
+		if (temp.charAt(temp.length() - 1) != '#') {
+			temp.insert(temp.length(), "#");
+		}
+		return temp.toString();
 	}
 }

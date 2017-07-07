@@ -19,13 +19,13 @@ public class Enlace {
 	/**
 	 * Contructor de la clase
 	 *
-	 * @param si   Simbolo a analizar en la cadena
-	 * @param qj   Estado con que se enlaza
-	 * @param sj   Simbolo a escribir en la cadena
-	 * @param move Movimiento del indice de la cadena
+	 * @param si Simbolo a analizar en la cadena
+	 * @param qj Estado con que se enlaza
+	 * @param sj Simbolo a escribir en la cadena
+	 * @param mover Movimiento del indice de la cadena
 	 */
-	public Enlace(char si, Estado qj, char sj, char move) {
-		setMovimiento(move);
+	public Enlace(char si, Estado qj, char sj, char mover) {
+		setMovimiento(mover);
 		setSj(sj);
 		setQj(qj);
 		setSi(si);
@@ -43,7 +43,7 @@ public class Enlace {
 	/**
 	 * Asigna simbolo a analizar
 	 *
-	 * @param si
+	 * @param si simbolo
 	 */
 	private void setSi(char si) {
 		this.si = si;
@@ -61,7 +61,7 @@ public class Enlace {
 	/**
 	 * Asigna simbolo a escribir
 	 *
-	 * @param sj
+	 * @param sj simbolo
 	 */
 	public void setSj(char sj) {
 		this.sj = sj;

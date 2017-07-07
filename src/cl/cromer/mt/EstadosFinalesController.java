@@ -22,7 +22,6 @@ import java.util.ArrayList;
 public class EstadosFinalesController {
 	@FXML
 	private VBox contenido;
-
 	private EstadosFinales estadosFinales;
 
 	/**

@@ -30,10 +30,9 @@ public class LoteController extends VBox {
 
 	/**
 	 * Boton de run MT
-	 * @throws Exception La excepción
 	 */
 	@FXML
-	protected void runLote() throws Exception {
+	protected void runLote() {
 		Scene scene = contenido.getScene();
 		EstadosFinales estadosFinales = (EstadosFinales) scene.getUserData();
 		Maquina maquina = estadosFinales.getMaquina();
@@ -54,7 +53,14 @@ public class LoteController extends VBox {
 	 */
 	@FXML
 	protected void agregarCadena() {
-		tablaData.add(new TablaData(cadena.getText(), ""));
+		StringBuilder temp = new StringBuilder(cadena.getText());
+		if (temp.charAt(0) != '#') {
+			temp.insert(0, "#");
+		}
+		if (temp.charAt(temp.length() - 1) != '#') {
+			temp.insert(temp.length(), "#");
+		}
+		tablaData.add(new TablaData(temp.toString(), ""));
 		Scene scene = contenido.getScene();
 		@SuppressWarnings("unchecked")
 		TableView<TablaData> tableView = (TableView<TablaData>) scene.lookup("#tableView");

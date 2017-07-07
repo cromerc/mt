@@ -10,25 +10,28 @@ This file may not be copied, modified, propagated, or distributed except accordi
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Text?>
-<VBox xmlns:fx="http://javafx.com/fxml/1" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.131" fx:controller="cl.cromer.mt.LoteController">
+<?import javafx.scene.text.*?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.92" fx:controller="cl.cromer.mt.IndividualController">
 	<ScrollPane fitToHeight="true" fitToWidth="true" VBox.vgrow="ALWAYS">
-		<VBox alignment="CENTER" VBox.vgrow="ALWAYS">
-			<VBox fx:id="contenido" alignment="CENTER" VBox.vgrow="ALWAYS">
-				<padding>
-					<Insets left="5.0" right="5.0" top="5.0" bottom="5.0"/>
-				</padding>
+		<VBox alignment="TOP_CENTER" VBox.vgrow="ALWAYS" fx:id="contenido">
+			<VBox alignment="CENTER" VBox.vgrow="ALWAYS" spacing="5">
+				<HBox alignment="TOP_CENTER" fx:id="cinta"/>
+				<Text fx:id="estadoActual"/>
+				<Text fx:id="estadoPrevio"/>
+				<Text fx:id="simboloLeido"/>
+				<Text fx:id="simboloEscrito"/>
+				<Text fx:id="movimiento"/>
 			</VBox>
 			<HBox alignment="CENTER" spacing="10.0">
 				<Text>Cadena:</Text>
 				<TextField id="cadena" fx:id="cadena" HBox.hgrow="ALWAYS"/>
-				<Button onAction="#agregarCadena" text="Agregar"/>
+				<Button fx:id="aceptar" onAction="#aceptarCadena" text="Aceptar"/>
 				<padding>
 					<Insets left="5.0" right="5.0" top="5.0" bottom="5.0"/>
 				</padding>
 			</HBox>
 			<HBox alignment="CENTER" spacing="10.0">
-				<Button onAction="#runLote" text="Run MT"/>
+				<Button fx:id="paso" disable="true" onAction="#paso" text="Correr Paso"/>
 				<Button onAction="#cerrar" text="Cerrar"/>
 				<padding>
 					<Insets left="5.0" right="5.0" top="5.0" bottom="5.0"/>

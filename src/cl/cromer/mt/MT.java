@@ -47,7 +47,7 @@ public class MT extends Application {
 	}
 
 	/**
-	 * Metodo de JavaFX llamada para generar el interfaz grafico.
+	 * Metodo de JavaFX llamada para generar el interfaz grafico
 	 * @param primaryStage La ventana principal
 	 * @throws Exception La excepción
 	 */

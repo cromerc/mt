@@ -15,7 +15,6 @@ import java.util.ArrayList;
 public class EstadosFinales {
 	private ArrayList<Integer> estadosExistentes;
 	private ArrayList<Integer> estadosElegidos;
-
 	private Maquina maquina;
 
 	/**

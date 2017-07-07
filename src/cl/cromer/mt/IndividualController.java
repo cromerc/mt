@@ -19,6 +19,9 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * Controlar las acciones de reconocimiento individual
+ */
 public class IndividualController extends VBox {
 	/**
 	 * El contenido de la venta

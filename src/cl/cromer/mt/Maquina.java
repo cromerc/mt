@@ -13,10 +13,29 @@ import org.w3c.dom.Document;
  * Clase de la Maquina de Turing que renocerá algún asociado a las transiciones escritas en un archivo XML
  */
 public class Maquina {
-	private final Automata maquina;
+	/**
+	 * La automata destras de la maquina de turning
+	 */
+	private final Automata automata;
+
+	/**
+	 * El estado actual donde se encuentra la maquina
+	 */
 	private Estado estadoActual;
+
+	/**
+	 * El enlace actual
+	 */
 	private Enlace enlaceActual;
+
+	/**
+	 * La cinta anterior para usar paso a paso
+	 */
 	private String cintaAnterior;
+
+	/**
+	 * Donde está el cabezal
+	 */
 	private int cabezal;
 
 	/**
@@ -25,21 +44,21 @@ public class Maquina {
 	 * @param document Document asociado al XML
 	 */
 	public Maquina(Document document) {
-		maquina = new Automata(document);
+		automata = new Automata(document);
 		reset();
 	}
 
 	/**
-	 * Retorna la maquina de Turing
+	 * Retorna la automata de Turing
 	 *
-	 * @return maquina asociado a alguna función de transición
+	 * @return automata asociado a alguna función de transición
 	 */
-	public Automata getMaquina() {
-		return maquina;
+	public Automata getAutomata() {
+		return automata;
 	}
 
 	/**
-	 * Retorna el estado en que esta la maquina
+	 * Retorna el estado en que esta la automata
 	 *
 	 * @return estado actual
 	 */
@@ -48,16 +67,16 @@ public class Maquina {
 	}
 
 	/**
-	 * Asigna un estado actual que esta la maquina en un instante de tiempo
+	 * Asigna un estado actual que esta la automata en un instante de tiempo
 	 *
-	 * @param estadoActual En que estado es la maquina
+	 * @param estadoActual En que estado es la automata
 	 */
 	public void setEstadoActual(Estado estadoActual) {
 		this.estadoActual = estadoActual;
 	}
 
 	/**
-	 * Retorna un enlace en que la maquina asocio a la cadena ingresada y al cabezal que se encuentra
+	 * Retorna un enlace en que la automata asocio a la cadena ingresada y al cabezal que se encuentra
 	 *
 	 * @return el enlace actual
 	 */
@@ -66,16 +85,16 @@ public class Maquina {
 	}
 
 	/**
-	 * Asigna un enlace actual que esta la maquina en un instante de tiempo
+	 * Asigna un enlace actual que esta la automata en un instante de tiempo
 	 *
-	 * @param enlaceActual La enlace donde esta la maquina
+	 * @param enlaceActual La enlace donde esta la automata
 	 */
 	public void setEnlaceActual(Enlace enlaceActual) {
 		this.enlaceActual = enlaceActual;
 	}
 
 	/**
-	 * Retorna la cadena anterior a que la maquina hiciera cambios
+	 * Retorna la cadena anterior a que la automata hiciera cambios
 	 *
 	 * @return la cadena anterior
 	 */
@@ -84,7 +103,7 @@ public class Maquina {
 	}
 
 	/**
-	 * Asigna la cadena anterior a que la maquina hiciera cambios
+	 * Asigna la cadena anterior a que la automata hiciera cambios
 	 * @param cintaAnterior La cinta a verificar
 	 */
 	public void setCintaAnterior(String cintaAnterior) {
@@ -113,14 +132,14 @@ public class Maquina {
 	 * Inicializa atributos
 	 */
 	public void reset() {
-		setEstadoActual(getMaquina().getEstados().get(0));
+		setEstadoActual(getAutomata().getEstados().get(0));
 		setEnlaceActual(null);
 		setCintaAnterior("");
 		setCabezal(1);
 	}
 
 	/**
-	 * Comprueba que si la cadena ingresada es reconocida por la maquina
+	 * Comprueba que si la cadena ingresada es reconocida por la automata
 	 *
 	 * @param cinta cadena ingresada por el usuario
 	 * @param estadosFinales Arreglo de estados finales, también ingresados por usuario
@@ -146,7 +165,7 @@ public class Maquina {
 
 	/**
 	 * Comprueba que si el simbolo en la cadena, identificado por el cabezal
-	 * es reconocido por la maquina. Este guarda la cadena anterior, estado actual y
+	 * es reconocido por la automata. Este guarda la cadena anterior, estado actual y
 	 * un enlace actual
 	 *
 	 * @param cinta Cadena ingresada por el usuario

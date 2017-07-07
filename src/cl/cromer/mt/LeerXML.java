@@ -20,7 +20,7 @@ import java.io.*;
 /**
  * Esta clase puede abrir y validar un archivo de XML. Se necesita un archivo mtbase.dtd
  */
-class LeerXML {
+public class LeerXML {
 	/**
 	 * El metodo va a verificar que el archivo existe y que contiene XML valido. Si es valido devuelve el documento.
 	 *
@@ -28,7 +28,7 @@ class LeerXML {
 	 *
 	 * @return Devuelve un document de XML o null si hay algun error.
 	 */
-	Document leerArchivo(File archivo) {
+	public Document leerArchivo(File archivo) {
 		if (archivo == null) {
 			return null;
 		}

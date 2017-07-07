@@ -11,9 +11,24 @@ package cl.cromer.mt;
  * Clase que funciona como enlaze entre dos estados ó asi mismo
  */
 public class Enlace {
+	/**
+	 * El simbolo a leer
+	 */
 	private char si;
+
+	/**
+	 * El simbolo a escribir
+	 */
 	private char sj;
+
+	/**
+	 * El movimento a hacer
+	 */
 	private char movimiento;
+
+	/**
+	 * El estado
+	 */
 	private Estado qj;
 
 	/**

@@ -20,48 +20,99 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class IndividualController extends VBox {
+	/**
+	 * El contenido de la venta
+	 */
 	@FXML
 	private VBox contenido;
 
+	/**
+	 * La cadena que ingresa el usuario
+	 */
 	@FXML
 	private TextField cadena;
 
+	/**
+	 * La cinta en la pantalla
+	 */
 	@FXML
 	private HBox cinta;
 
+	/**
+	 * El boton de acapter cadena
+	 */
 	@FXML
 	private Button aceptar;
 
+	/**
+	 * El boton que corre paso a paso
+	 */
 	@FXML
 	private Button paso;
 
+	/**
+	 * El estado actual de la maquina
+	 */
 	@FXML
 	private Text estadoActual;
 
+	/**
+	 * El estado en el paso anterior
+	 */
 	@FXML
 	private Text estadoPrevio;
 
+	/**
+	 * El simbolo que lee la maquina
+	 */
 	@FXML
 	private Text simboloLeido;
 
+	/**
+	 * Lo que escribe la maquina
+	 */
 	@FXML
 	private Text simboloEscrito;
 
+	/**
+	 * A donde mueve la maquina
+	 */
 	@FXML
 	private Text movimiento;
 
+	/**
+	 * La cadena acapatada por el usario
+	 */
 	private String cadenaAceptada;
 
+	/**
+	 * Los estados finales que viene de la ventana anterior
+	 */
 	private EstadosFinales estadosFinales;
 
+	/**
+	 * La maquina turning pasado para correr
+	 */
 	private Maquina maquina;
 
+	/**
+	 * Donde estaba el cabezal anteriormente
+	 */
 	private int cabezalAnterior;
 
+	/**
+	 * La cantidad de cajas que está en la pantalla
+	 */
 	private int cajas;
 
+	/**
+	 * El numero qx del estado anterior
+	 */
 	private int estadoPrevioi;
 
+	/**
+	 * El simbolo que lee antes que la maquina escribe
+	 */
 	private char simboloAnterior;
 
 	/**

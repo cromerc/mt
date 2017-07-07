@@ -13,7 +13,14 @@ import javafx.beans.property.SimpleStringProperty;
  * Esta clase se usa para organizar las columnas de un TableView
  */
 public class TablaData {
+	/**
+	 * La primera columna de la fila
+	 */
 	private final SimpleStringProperty primera;
+
+	/**
+	 * La segunda columna de la fila
+	 */
 	private final SimpleStringProperty segunda;
 
 	/**

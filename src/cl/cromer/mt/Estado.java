@@ -12,7 +12,14 @@ import java.util.ArrayList;
  * Clase que almanecerá un estado con su subindices y sus enlaces adyacentes
  */
 public class Estado {
+	/**
+	 * El estado actual
+	 */
 	private final int q;
+
+	/**
+	 * Los enlaces que tiene este estado
+	 */
 	private final ArrayList<Enlace> enlaces;
 
 	/**

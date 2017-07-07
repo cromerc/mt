@@ -13,8 +13,19 @@ import java.util.ArrayList;
  * Esta clase es un objeto para pasar entre los stage.
  */
 public class EstadosFinales {
+	/**
+	 * Los estados que existen
+	 */
 	private ArrayList<Integer> estadosExistentes;
+
+	/**
+	 * Los estados que eligó el usuario
+	 */
 	private ArrayList<Integer> estadosElegidos;
+
+	/**
+	 * La maquina turning con sus transiciones, estados y enlaces
+	 */
 	private Maquina maquina;
 
 	/**
@@ -24,7 +35,7 @@ public class EstadosFinales {
 	 */
 	public EstadosFinales(Maquina maquina) {
 		this.maquina = maquina;
-		this.estadosExistentes = maquina.getMaquina().getEstadosExistentes();
+		this.estadosExistentes = maquina.getAutomata().getEstadosExistentes();
 	}
 
 	/**

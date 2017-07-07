@@ -20,8 +20,15 @@ import java.util.ArrayList;
  * Controlar las acciones cuando el usuario elige los estados finales
  */
 public class EstadosFinalesController {
+	/**
+	 * El contenido de la ventan de eligir estados finales
+	 */
 	@FXML
 	private VBox contenido;
+
+	/**
+	 * Los estados finales eligidos
+	 */
 	private EstadosFinales estadosFinales;
 
 	/**

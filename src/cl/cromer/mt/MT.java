@@ -25,6 +25,9 @@ import javafx.stage.Stage;
  * @version 1.0.0
  */
 public class MT extends Application {
+	/**
+	 * La version de Maquina de Turing
+	 */
 	static public final String version = "1.0.0";
 
 	/**

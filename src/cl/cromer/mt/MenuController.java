@@ -35,13 +35,27 @@ import java.util.regex.Pattern;
  * Controlar las acciones cuando una opción es elegido en el menu.
  */
 public class MenuController {
+	/**
+	 * La barra del menu
+	 */
 	@FXML
 	private MenuBar menuBar;
+
+	/**
+	 * La opción del menu por individual
+	 */
 	@FXML
 	private MenuItem menuIndiv;
+
+	/**
+	 * La opción del enu por individual
+	 */
 	@FXML
 	private MenuItem menuLote;
 
+	/**
+	 * Los estados finales que se usa en lote y individual
+	 */
 	private EstadosFinales estadosFinales;
 
 	/**
@@ -94,8 +108,8 @@ public class MenuController {
 
 			ObservableList<TablaData> tablaData = FXCollections.observableArrayList();
 			Pattern pattern = Pattern.compile("(\\(.*\\)) = (\\(.*\\))");
-			for (int i = 0; i < maquina.getMaquina().getEstados().size(); i++) {
-				Matcher matcher = pattern.matcher(maquina.getMaquina().getEstados().get(i).toString());
+			for (int i = 0; i < maquina.getAutomata().getEstados().size(); i++) {
+				Matcher matcher = pattern.matcher(maquina.getAutomata().getEstados().get(i).toString());
 				while (matcher.find()) {
 					tablaData.add(new TablaData(matcher.group(1), matcher.group(2)));
 				}

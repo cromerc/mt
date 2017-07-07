@@ -15,7 +15,14 @@ import java.util.ArrayList;
  * Clase que contiene métodos que guarda y ordena cada transición del archivo XML ya validado
  */
 public class Automata {
+	/**
+	 * Los estados y sus enlaces
+	 */
 	private ArrayList<Estado> estados;
+
+	/**
+	 * Los estados que existen
+	 */
 	private ArrayList<Integer> estadosExistentes;
 
 	/**

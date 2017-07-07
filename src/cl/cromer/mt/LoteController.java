@@ -20,11 +20,20 @@ import javafx.stage.Stage;
  * Controlar las acciones de reconocimiento por lote
  */
 public class LoteController extends VBox {
+	/**
+	 * La tabla de resultados por lote
+	 */
 	private final ObservableList<TablaData> tablaData = FXCollections.observableArrayList();
 
+	/**
+	 * El contenido de la ventana
+	 */
 	@FXML
 	private VBox contenido;
 
+	/**
+	 * La cadena que el usuario ingresa
+	 */
 	@FXML
 	private TextField cadena;
 

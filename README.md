@@ -1,5 +1,5 @@
 # MAQUINA DE TURING
-Este proyecto es un implimentación de la Maquina de Turing.
+Este proyecto es una implementación de la Maquina de Turing.
 
 # AUTORES
 * Christopher Cromer

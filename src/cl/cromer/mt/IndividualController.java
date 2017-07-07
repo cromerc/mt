@@ -157,7 +157,7 @@ public class IndividualController extends VBox {
 		mover = false;
 		simboloAnterior = '\0';
 
-		descripcion.setText("Inicio en estado: q" + maquina.getEstadoActual().getQ());
+		descripcion.setText("Inicio en estado q" + maquina.getEstadoActual().getQ());
 	}
 
 	/**

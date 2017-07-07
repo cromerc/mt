@@ -202,7 +202,22 @@ public class IndividualController extends VBox {
 			}
 
 			if (mover) {
-				descripcion.setText("Mover al estado q" + maquina.getEstadoActual().getQ() + " desde estado q" + estadoPrevio);
+				String move = "";
+				switch (maquina.getEnlaceActual().getMovimiento()) {
+					case 'L': {
+						move = "se movio a la izquierda";
+						break;
+					}
+					case 'R': {
+						move = "se movio a la derecha";
+						break;
+					}
+					default: {
+						move = "no se movio";
+						break;
+					}
+				}
+				descripcion.setText("La cinta "+move+"\nCambia del estado q" + estadoPrevio + " al estado q" + maquina.getEstadoActual().getQ());
 
 				// Undo cabezel anterior
 				Rectangle rectangle = (Rectangle) scene.lookup("#caja_" + cabezalAnterior);
@@ -222,7 +237,7 @@ public class IndividualController extends VBox {
 			}
 			else {
 				Text simbolo = (Text) scene.lookup("#simbolo_" + cabezalAnterior);
-				descripcion.setText("Simbolo leido \"" + simboloAnterior + "\" y simbolo escrito \"" + simbolo.getText() + "\"");
+				descripcion.setText("Se leyo el simbolo \"" + simboloAnterior + "\" y se escribio el simbolo \"" + simbolo.getText() + "\"");
 				mover = true;
 			}
 		}

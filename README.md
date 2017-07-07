@@ -40,6 +40,7 @@ Los archivos de xml de los transiciones debe ser de este estilo:
 		<si>0</si>
 		<qj>0</qj>
 		<sj>0</sj>
+		<qj>0</qj>
 		<movimiento>R</movimiento>
 	</transicion>
 </root>

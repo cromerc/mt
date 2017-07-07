@@ -66,7 +66,6 @@ El código se encuentra en la carpeta src o en github: [fundamentos](https://git
 
 ## JAVADOC <a id="javadoc"></a>
 La documentación del proyecto se puede ver en la carpeta doc o en la enlace: [JavaDoc](https://cromer.cl/mt/doc/index.html)
-Vamos a cambiar la enlace a otra lugar despues, ignora que muestra el codigo.
 
 ## LICIENCIA <a id="liciencia"></a>
 El programa es bajo la licenca de "3 Clause BSD" que se encuentra en la carpeta principal o en la pagina: [LICENSE](https://github.com/cromerc/fundamentos/blob/master/LICENSE)

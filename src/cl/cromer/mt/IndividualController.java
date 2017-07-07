@@ -54,34 +54,10 @@ public class IndividualController extends VBox {
 	private Button paso;
 
 	/**
-	 * El estado actual de la maquina
+	 * La descripcion de que hace la maquina
 	 */
 	@FXML
-	private Text estadoActual;
-
-	/**
-	 * El estado en el paso anterior
-	 */
-	@FXML
-	private Text estadoPrevio;
-
-	/**
-	 * El simbolo que lee la maquina
-	 */
-	@FXML
-	private Text simboloLeido;
-
-	/**
-	 * Lo que escribe la maquina
-	 */
-	@FXML
-	private Text simboloEscrito;
-
-	/**
-	 * A donde mueve la maquina
-	 */
-	@FXML
-	private Text movimiento;
+	private Text descripcion;
 
 	/**
 	 * La cadena acapatada por el usario
@@ -111,12 +87,17 @@ public class IndividualController extends VBox {
 	/**
 	 * El numero qx del estado anterior
 	 */
-	private int estadoPrevioi;
+	private int estadoPrevio;
 
 	/**
 	 * El simbolo que lee antes que la maquina escribe
 	 */
 	private char simboloAnterior;
+
+	/**
+	 * Si debe mover o si debe mostrar lo que lee y escribe
+	 */
+	private boolean mover;
 
 	/**
 	 * Este metodo se crea una caja para poner un simbolo de la cinta
@@ -151,6 +132,7 @@ public class IndividualController extends VBox {
 		Scene scene = contenido.getScene();
 		estadosFinales = (EstadosFinales) scene.getUserData();
 		maquina = estadosFinales.getMaquina();
+		maquina.reset();
 		cadenaAceptada = cadena.getText();
 		StringBuilder temp = new StringBuilder(cadenaAceptada);
 		temp.insert(0, "#");
@@ -171,13 +153,11 @@ public class IndividualController extends VBox {
 		aceptar.setDisable(true);
 		paso.setDisable(false);
 		cabezalAnterior = 1;
-		estadoPrevioi = 0;
+		estadoPrevio = 0;
+		mover = false;
+		simboloAnterior = '\0';
 
-		estadoActual.setText("Estado actual: q" + maquina.getEstadoActual().getQ());
-		estadoPrevio.setText("Estado previo: q" + estadoPrevioi);
-		simboloLeido.setText("Simbolo leido: #");
-		simboloEscrito.setText("Simbolo escrito: #");
-		movimiento.setText("Movimiento: #");
+		descripcion.setText("Inicio en estado: q" + maquina.getEstadoActual().getQ());
 	}
 
 	/**
@@ -187,7 +167,10 @@ public class IndividualController extends VBox {
 	protected void paso() {
 		Scene scene = contenido.getScene();
 
-		int resultado = maquina.comprobarCadenaS2S(new StringBuilder(cadenaAceptada), estadosFinales.getEstadosElegidos().stream().mapToInt(i -> i).toArray());
+		int resultado = 0;
+		if (!mover) {
+			resultado = maquina.comprobarCadenaS2S(new StringBuilder(cadenaAceptada), estadosFinales.getEstadosElegidos().stream().mapToInt(i -> i).toArray());
+		}
 
 		if (resultado == 1) {
 			MT.mostrarMensaje("Resultado", "La cadena fue aceptada!");
@@ -212,32 +195,36 @@ public class IndividualController extends VBox {
 
 			for (int i = 0; i < maquina.getCintaAnterior().length(); i++) {
 				Text simbolo = (Text) scene.lookup("#simbolo_" + i);
-				if (i == maquina.getCabezal()) {
+				if (i == maquina.getCabezal() && (mover || simboloAnterior == '\0')) {
 					simboloAnterior = simbolo.getText().charAt(0);
 				}
 				simbolo.setText(String.valueOf(maquina.getCintaAnterior().charAt(i)));
 			}
 
-			// Undo cabezel anterior
-			Rectangle rectangle = (Rectangle) scene.lookup("#caja_" + cabezalAnterior);
-			rectangle.setFill(Color.WHITE);
-			Text simbolo = (Text) scene.lookup("#simbolo_" + cabezalAnterior);
-			simbolo.setStroke(Color.BLACK);
+			if (mover) {
+				descripcion.setText("Mover al estado q" + maquina.getEstadoActual().getQ() + " desde estado q" + estadoPrevio);
 
-			estadoActual.setText("Estado actual: q" + maquina.getEstadoActual().getQ());
-			estadoPrevio.setText("Estado previo: q" + estadoPrevioi);
-			simboloLeido.setText("Simbolo leido: " + simboloAnterior);
-			simboloEscrito.setText("Simbolo escrito: " + simbolo.getText());
-			movimiento.setText("Movimiento: " + maquina.getEnlaceActual().getMovimiento());
+				// Undo cabezel anterior
+				Rectangle rectangle = (Rectangle) scene.lookup("#caja_" + cabezalAnterior);
+				rectangle.setFill(Color.WHITE);
+				Text simbolo = (Text) scene.lookup("#simbolo_" + cabezalAnterior);
+				simbolo.setStroke(Color.BLACK);
 
-			// Cabezel
-			rectangle = (Rectangle) scene.lookup("#caja_" + maquina.getCabezal());
-			rectangle.setFill(Color.BLUE);
-			simbolo = (Text) scene.lookup("#simbolo_" + maquina.getCabezal());
-			simbolo.setStroke(Color.WHITE);
+				// Cabezel
+				rectangle = (Rectangle) scene.lookup("#caja_" + maquina.getCabezal());
+				rectangle.setFill(Color.BLUE);
+				simbolo = (Text) scene.lookup("#simbolo_" + maquina.getCabezal());
+				simbolo.setStroke(Color.WHITE);
 
-			cabezalAnterior = maquina.getCabezal();
-			estadoPrevioi = maquina.getEstadoActual().getQ();
+				cabezalAnterior = maquina.getCabezal();
+				estadoPrevio = maquina.getEstadoActual().getQ();
+				mover = false;
+			}
+			else {
+				Text simbolo = (Text) scene.lookup("#simbolo_" + cabezalAnterior);
+				descripcion.setText("Simbolo leido \"" + simboloAnterior + "\" y simbolo escrito \"" + simbolo.getText() + "\"");
+				mover = true;
+			}
 		}
 	}
 

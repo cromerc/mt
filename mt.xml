@@ -148,6 +148,7 @@
   <path id="mt.module.sourcepath">
     <dirset dir="${module.mt.basedir}">
       <include name="src"/>
+      <include name="ejemplos"/>
     </dirset>
   </path>
 
@@ -166,6 +167,10 @@
 
     <copy todir="${mt.output.dir}">
       <fileset dir="${module.mt.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.mt.basedir}/ejemplos">
         <patternset refid="compiler.resources"/>
         <type type="file"/>
       </fileset>
@@ -195,7 +200,7 @@
     <taskdef resource="com/sun/javafx/tools/ant/antlib.xml" uri="javafx:com.sun.javafx.tools.ant" classpath="${jdk.home.1.8}/lib/ant-javafx.jar"/>
   </target>
 
-  <target name="clean.artifact.mt" depends="init.artifacts" description="clean MT artifact output">
+  <target name="clean.artifact.mt" description="clean MT artifact output">
     <delete dir="${artifact.output.mt}"/>
   </target>
 

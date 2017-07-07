@@ -202,7 +202,7 @@ public class IndividualController extends VBox {
 			}
 
 			if (mover) {
-				String move = "";
+				String move;
 				switch (maquina.getEnlaceActual().getMovimiento()) {
 					case 'L': {
 						move = "se movio a la izquierda";
@@ -217,7 +217,7 @@ public class IndividualController extends VBox {
 						break;
 					}
 				}
-				descripcion.setText("La cinta "+move+"\nCambia del estado q" + estadoPrevio + " al estado q" + maquina.getEstadoActual().getQ());
+				descripcion.setText("La cinta " + move + "\nCambia del estado q" + estadoPrevio + " al estado q" + maquina.getEstadoActual().getQ());
 
 				// Undo cabezel anterior
 				Rectangle rectangle = (Rectangle) scene.lookup("#caja_" + cabezalAnterior);

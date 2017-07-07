@@ -153,6 +153,7 @@ public class IndividualController extends VBox {
 		temp.insert(0, "#");
 		temp.insert(cadenaAceptada.length() + 1, "#");
 		cadenaAceptada = temp.toString();
+		cinta.getChildren().clear();
 		for (int i = 0; i < cadenaAceptada.length(); i++) {
 			cinta.getChildren().add(crearCaja(String.valueOf(i), String.valueOf(cadenaAceptada.charAt(i))));
 			cajas = i + 1;
@@ -161,6 +162,7 @@ public class IndividualController extends VBox {
 		rectangle.setFill(Color.BLUE);
 		Text simbolo = (Text) scene.lookup("#simbolo_1");
 		simbolo.setStroke(Color.WHITE);
+
 		cadena.setText("");
 		cadena.setDisable(true);
 		aceptar.setDisable(true);

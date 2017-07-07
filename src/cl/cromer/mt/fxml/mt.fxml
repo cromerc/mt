@@ -9,9 +9,15 @@ This file may not be copied, modified, propagated, or distributed except accordi
 
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <VBox xmlns:fx="http://javafx.com/fxml/1" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.92">
 	<fx:include source="menu.fxml"/>
 	<ScrollPane fitToHeight="true" fitToWidth="true" VBox.vgrow="ALWAYS">
-		<VBox alignment="CENTER" VBox.vgrow="ALWAYS" fx:id="contenido"/>
+		<VBox alignment="CENTER" VBox.vgrow="ALWAYS" fx:id="contenido">
+			<ImageView fx:id="logo">
+				<Image url="@/cl/cromer/mt/images/UBBLogo.png"/>
+			</ImageView>
+		</VBox>
 	</ScrollPane>
 </VBox>

@@ -14,13 +14,12 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -54,6 +53,13 @@ public class MenuController {
 	protected void cargarTransiciones() throws Exception {
 		Scene scene = menuBar.getScene();
 		Stage parentStage = (Stage) scene.getWindow();
+
+		ImageView imageView = (ImageView) scene.lookup("#logo");
+		if (imageView != null) {
+			VBox vbox = (VBox) imageView.getParent();
+			vbox.getChildren().remove(imageView);
+		}
+
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Abrir archivo XML");
 		fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivos XML (*.xml)", "*.xml"));
@@ -217,6 +223,21 @@ public class MenuController {
 
 		VBox contenido = (VBox) scene.lookup("#contenido");
 		contenido.getChildren().add(tableView);
+	}
+
+	/**
+	 * Click en acerca.
+	 */
+	@FXML
+	protected void menuAcerca() {
+		ButtonType botonCerrar = new ButtonType("Cerrar", ButtonBar.ButtonData.OK_DONE);
+		Alert alert = new Alert(Alert.AlertType.NONE, "Maquina de Turning " + MT.version + "\n\nConstruido por:\n\tChristopher Cromer\n\tCarlos Fáundez\n\nIngenier\u00EDa Civil en Inform\u00E1tica\nUniversidad del B\u00EDo B\u00EDo");
+		alert.getDialogPane().getChildren().stream().filter(node -> node instanceof Label).forEach(node -> ((Label)node).setMinHeight(Region.USE_PREF_SIZE));
+		alert.setGraphic(null);
+		alert.getDialogPane().getButtonTypes().add(botonCerrar);
+		Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+		stage.getIcons().add(new Image(getClass().getResourceAsStream("/cl/cromer/mt/images/icon.png")));
+		alert.show();
 	}
 
 	/**

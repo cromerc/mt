@@ -14,4 +14,7 @@ This file may not be copied, modified, propagated, or distributed except accordi
 		<MenuItem fx:id="menuIndiv" text="Reconocimiento individual" disable="true" onAction="#reconoceIndividual"/>
 		<MenuItem fx:id="menuLote" text="Reconocimiento por lote" disable="true" onAction="#reconoceLote"/>
 	</Menu>
+	<Menu text="Ayuda">
+		<MenuItem text="Acerca" onAction="#menuAcerca" />
+	</Menu>
 </MenuBar>

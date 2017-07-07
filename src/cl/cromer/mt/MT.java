@@ -18,9 +18,15 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
- * Esta clase es la clase princial de la Maquina Turing
+ * Maquina de Turing
+ *
+ * @author Christopher Cromer
+ * @author Carlos Fáundez
+ * @version 1.0.0
  */
 public class MT extends Application {
+	static public final String version = "1.0.0";
+
 	/**
 	 * El metodo principal del programa
 	 *
@@ -53,7 +59,7 @@ public class MT extends Application {
 	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Parent root = FXMLLoader.load(getClass().getResource("fxml/mt.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/cl/cromer/mt/fxml/mt.fxml"));
 		primaryStage.setTitle("Maquina de Turing");
 
 		Scene scene = new Scene(root, 640, 480);

@@ -24,6 +24,7 @@ Para compilar y/o correr el código se necesita:
 * JavaFX
 
 Se puede compilarlo a treves de build artifact, o tambien se puede compilar con apache-ant.
+El proyecto fue desarollado en IntellIJ, pero se puede importar a NetBeans o Eclipse con un poco de cambios.
 
 ## DESCARGAR BINARIOS <a id="binarios"></a>
 Se puede encontrar binarios compilados para windows y linux en la pagina: [MT](https://cromer.cl/mt)
@@ -63,7 +64,7 @@ Se muestra paso por paso la cinta durante la operación.
 La opción de reconocimiento por lote pide que ingresa varias cadenas. Al correr la maquina se va a mostrar si cada uno es aceptada or rechazada por la maquina.
 
 ## CÓDIGO <a id="codigo"></a>
-El código se encuentra en la carpeta src o en github: [fundamentos](https://github.com/cromerc/fundamentos)
+El código se encuentra en la carpeta src o en github: [mt](https://github.com/cromerc/mx)
 
 ## JAVADOC <a id="javadoc"></a>
 La documentación del proyecto se puede ver en la carpeta doc o en la enlace: [JavaDoc](https://cromer.cl/mt/doc/index.html)

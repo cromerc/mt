@@ -116,7 +116,7 @@ public class IndividualController extends VBox {
 		rectangle.setId("caja_" + label);
 		Text text = new Text();
 		text.setId("simbolo_" + label);
-		text.setStroke(Color.BLACK);
+		text.setFill(Color.BLACK);
 		text.setText(texto);
 
 		StackPane stackPane = new StackPane();
@@ -146,7 +146,7 @@ public class IndividualController extends VBox {
 		Rectangle rectangle = (Rectangle) scene.lookup("#caja_1");
 		rectangle.setFill(Color.BLUE);
 		Text simbolo = (Text) scene.lookup("#simbolo_1");
-		simbolo.setStroke(Color.WHITE);
+		simbolo.setFill(Color.WHITE);
 
 		cadena.setText("");
 		cadena.setDisable(true);
@@ -223,13 +223,13 @@ public class IndividualController extends VBox {
 				Rectangle rectangle = (Rectangle) scene.lookup("#caja_" + cabezalAnterior);
 				rectangle.setFill(Color.WHITE);
 				Text simbolo = (Text) scene.lookup("#simbolo_" + cabezalAnterior);
-				simbolo.setStroke(Color.BLACK);
+				simbolo.setFill(Color.BLACK);
 
 				// Cabezel
 				rectangle = (Rectangle) scene.lookup("#caja_" + maquina.getCabezal());
 				rectangle.setFill(Color.BLUE);
 				simbolo = (Text) scene.lookup("#simbolo_" + maquina.getCabezal());
-				simbolo.setStroke(Color.WHITE);
+				simbolo.setFill(Color.WHITE);
 
 				cabezalAnterior = maquina.getCabezal();
 				estadoPrevio = maquina.getEstadoActual().getQ();

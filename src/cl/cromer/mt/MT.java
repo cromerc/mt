@@ -11,10 +11,9 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 /**
@@ -22,13 +21,13 @@ import javafx.stage.Stage;
  *
  * @author Christopher Cromer
  * @author Carlos Fáundez
- * @version 1.0.0
+ * @version 1.0.1
  */
 public class MT extends Application {
 	/**
 	 * La version de Maquina de Turing
 	 */
-	static public final String version = "1.0.0";
+	static public final String version = "1.0.1";
 
 	/**
 	 * El metodo principal del programa
@@ -72,5 +71,16 @@ public class MT extends Application {
 		primaryStage.setMinWidth(640);
 		primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/cl/cromer/mt/images/icon.png")));
 		primaryStage.show();
+		if (Double.valueOf(System.getProperty("java.specification.version")) < 1.8) {
+			ButtonType botonCerrar = new ButtonType("Cerrar", ButtonBar.ButtonData.OK_DONE);
+			Alert alert = new Alert(Alert.AlertType.NONE, "El programa se necesita Java 8 para correr.");
+			alert.getDialogPane().getChildren().stream().filter(node -> node instanceof Label).forEach(node -> ((Label) node).setMinHeight(Region.USE_PREF_SIZE));
+			alert.setGraphic(null);
+			alert.getDialogPane().getButtonTypes().add(botonCerrar);
+			Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+			stage.getIcons().add(new Image(getClass().getResourceAsStream("/cl/cromer/mt/images/icon.png")));
+			alert.showAndWait();
+			primaryStage.close();
+		}
 	}
 }

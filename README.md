@@ -64,10 +64,10 @@ Se muestra paso por paso la cinta durante la operación.
 La opción de reconocimiento por lote pide que ingresa varias cadenas. Al correr la maquina se va a mostrar si cada uno es aceptada or rechazada por la maquina.
 
 ## CÓDIGO <a id="codigo"></a>
-El código se encuentra en la carpeta src o en github: [mt](https://github.com/cromerc/mt)
+El código se encuentra en la carpeta src o en el git repo: [mt](https://git.cromer.cl/cromer/mt)
 
 ## JAVADOC <a id="javadoc"></a>
 La documentación del proyecto se puede ver en la carpeta doc o en la enlace: [JavaDoc](https://cromer.cl/mt/doc/index.html)
 
 ## LICIENCIA <a id="liciencia"></a>
-El programa es bajo la licenca de "3 Clause BSD" que se encuentra en la carpeta principal o en la pagina: [LICENSE](https://github.com/cromerc/fundamentos/blob/master/LICENSE)
+El programa es bajo la licenca de "3 Clause BSD" que se encuentra en la carpeta principal o en la pagina: [LICENSE](https://git.cromer.cl/UBB/mt/raw/branch/master/LICENSE)

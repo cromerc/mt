@@ -7,7 +7,6 @@
 
 package cl.cromer.mt;
 
-import com.sun.javafx.scene.control.skin.TableHeaderRow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -16,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.control.skin.TableHeaderRow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Priority;
@@ -100,10 +100,6 @@ public class MenuController {
 			}
 			TableView<TablaData> tableView = FXMLLoader.load(getClass().getResource("/cl/cromer/mt/fxml/tabla.fxml"));
 			VBox.setVgrow(tableView, Priority.ALWAYS);
-			tableView.skinProperty().addListener((source, oldWidth, newWidth) -> {
-				final TableHeaderRow header = (TableHeaderRow) tableView.lookup("TableHeaderRow");
-				header.reorderingProperty().addListener((observable, oldValue, newValue) -> header.setReordering(false));
-			});
 			tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
 			ObservableList<TablaData> tablaData = FXCollections.observableArrayList();
@@ -216,10 +212,6 @@ public class MenuController {
 
 		TableView<TablaData> tableView = FXMLLoader.load(getClass().getResource("/cl/cromer/mt/fxml/tabla.fxml"));
 		VBox.setVgrow(tableView, Priority.ALWAYS);
-		tableView.skinProperty().addListener((source, oldWidth, newWidth) -> {
-			final TableHeaderRow header = (TableHeaderRow) tableView.lookup("TableHeaderRow");
-			header.reorderingProperty().addListener((observable, oldValue, newValue) -> header.setReordering(false));
-		});
 		tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
 		tableView.setEditable(true);

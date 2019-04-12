@@ -21,13 +21,13 @@ import javafx.stage.Stage;
  *
  * @author Christopher Cromer
  * @author Carlos Fáundez
- * @version 1.0.1
+ * @version 1.0.2
  */
 public class MT extends Application {
 	/**
 	 * La version de Maquina de Turing
 	 */
-	static public final String version = "1.0.1";
+	static public final String version = "1.0.2";
 
 	/**
 	 * El metodo principal del programa
